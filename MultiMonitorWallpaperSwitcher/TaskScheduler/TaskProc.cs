@@ -5,6 +5,7 @@ using MultiMonitorWallpaperSwitcher.Profile;
 using MultiMonitorWallpaperSwitcher.Wallpaper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,8 @@ namespace MultiMonitorWallpaperSwitcher.TaskScheduler
         /// - 方法内部不会再去读取数据库内容
         /// </summary>
         /// <param name="deviceId">设备 ID</param>
+        /// <param name="intervalTime"></param>
+        /// <param name="folderList"></param>
         /// <returns>返回所设置的壁纸路径</returns>
         public static string ExecuteOneTask(string deviceId, int intervalTime, string folderList)
         {
@@ -143,6 +146,35 @@ namespace MultiMonitorWallpaperSwitcher.TaskScheduler
             }
             SetNextTask();
             return imageFile;
+        }
+
+        /// <summary>
+        /// 通过指定图片路径执行单个任务
+        /// </summary>
+        /// <param name="deviceId">设备 ID</param>
+        /// <param name="intervalTime"></param>
+        /// <param name="imageFile"></param>
+        public static void ExecuteOneTaskByImage(string deviceId, int intervalTime, string imageFile)
+        {
+            StopAllTasks();
+            if (!string.IsNullOrEmpty(imageFile) && File.Exists(imageFile))
+            {
+                var monitorItems = MonitorProc.GetMonitorItems();
+                if (monitorItems.Count > 0 )
+                {
+                    WallpaperProc.SetUserEnvironmentValue();
+                    DateTime now = DateTime.Now;
+                    foreach (var item in monitorItems)
+                    {
+                        if (deviceId == item.DeviceId)
+                        {
+                            Glob.ExcutionInfo.SetTime(deviceId, now, intervalTime);
+                            WallpaperProc.SetWallpaper(deviceId, imageFile);
+                        }
+                    }
+                }
+            }
+            SetNextTask();
         }
     }
 }

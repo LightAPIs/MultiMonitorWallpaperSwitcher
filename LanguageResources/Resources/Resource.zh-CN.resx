@@ -312,4 +312,13 @@
   <data name="AutoRunProgram" xml:space="preserve">
     <value>系统启动时自动运行程序</value>
   </data>
+  <data name="SetSpecifiedImage" xml:space="preserve">
+    <value>设置为指定图片</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>选择图片作为壁纸</value>
+  </data>
 </root>

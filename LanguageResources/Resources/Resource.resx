@@ -312,4 +312,13 @@
   <data name="AutoRunProgram" xml:space="preserve">
     <value>Run program automatically when the system starts</value>
   </data>
+  <data name="SetSpecifiedImage" xml:space="preserve">
+    <value>Set as specified image</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>Select picture as wallpaper</value>
+  </data>
 </root>

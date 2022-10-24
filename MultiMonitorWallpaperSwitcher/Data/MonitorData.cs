@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -13,8 +15,7 @@ using MultiMonitorWallpaperSwitcher.Monitor;
 using MultiMonitorWallpaperSwitcher.Wallpaper;
 using MultiMonitorWallpaperSwitcher.CommandBase;
 using MultiMonitorWallpaperSwitcher.TaskScheduler;
-using System.IO;
-using System.Diagnostics;
+using LanguageResources;
 
 namespace MultiMonitorWallpaperSwitcher.Data
 {
@@ -362,6 +363,38 @@ namespace MultiMonitorWallpaperSwitcher.Data
                             if (!string.IsNullOrEmpty(imageFile))
                             {
                                 WallpaperPath = imageFile;
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        /// <summary>
+        /// 设置为指定的图片
+        /// </summary>
+        public ICommand SetSpecifiedImage
+        {
+            get
+            {
+                return new ContextCommand
+                {
+                    CommandAction = _paramater =>
+                    {
+                        OpenFileDialog ofd = new OpenFileDialog
+                        {
+                            Filter = Resource.Image + "|*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.tif;*.dib;*.jfif;*.jpe;*.wdp",
+                            Title = Resource.SelectImage,
+                            RestoreDirectory = true,
+                            CheckFileExists = true,
+                        };
+                        if (ofd.ShowDialog() == DialogResult.OK)
+                        {
+                            string imagePath = ofd.FileName;
+                            if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                            {
+                                TaskProc.ExecuteOneTaskByImage(mDeviceId, mIntervalTime, imagePath);
+                                WallpaperPath = imagePath;
                             }
                         }
                     }

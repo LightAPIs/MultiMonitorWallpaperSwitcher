@@ -286,6 +286,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Image 的本地化字符串。
+        /// </summary>
+        public static string Image {
+            get {
+                return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Already the latest version 的本地化字符串。
         /// </summary>
         public static string IsLatest {
@@ -426,6 +435,24 @@ namespace LanguageResources {
         public static string Resolution {
             get {
                 return ResourceManager.GetString("Resolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select picture as wallpaper 的本地化字符串。
+        /// </summary>
+        public static string SelectImage {
+            get {
+                return ResourceManager.GetString("SelectImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Set as specified image 的本地化字符串。
+        /// </summary>
+        public static string SetSpecifiedImage {
+            get {
+                return ResourceManager.GetString("SetSpecifiedImage", resourceCulture);
             }
         }
         

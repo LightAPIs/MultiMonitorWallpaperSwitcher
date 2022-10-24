@@ -108,6 +108,7 @@
                                             <materialDesign:Card.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="{x:Static lang:Resource.SwitchNextWallpaper}" Command="{Binding SwitchNextWallpaper}"/>
+                                                    <MenuItem Header="{x:Static lang:Resource.SetSpecifiedImage}" Command="{Binding SetSpecifiedImage}"/>
                                                     <MenuItem Header="{x:Static lang:Resource.RefreshCurrentCard}" Command="{Binding RefreshCardContent}"/>
                                                     <Separator/>
                                                     <MenuItem Header="{x:Static lang:Resource.ViewCurrentImage}" Command="{Binding ShowCurrentWallpaperImage}"/>

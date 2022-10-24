@@ -41,7 +41,13 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
             return wallpaper.GetWallpaper(deviceId);
         }
 
-        private static void SetWallpaper(string deviceId, string path)
+        /// <summary>
+        /// 为显示器设定指定图片为壁纸
+        /// - 方法内部已自动更新数据库
+        /// </summary>
+        /// <param name="deviceId"></param>
+        /// <param name="path"></param>
+        public static void SetWallpaper(string deviceId, string path)
         {
             if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
