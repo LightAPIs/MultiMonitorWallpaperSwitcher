@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TabMonitor" xml:space="preserve">
+    <value>显示器</value>
+  </data>
+  <data name="TabAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="TabSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>打开主窗口</value>
+  </data>
+  <data name="SwitchWallpaperSet" xml:space="preserve">
+    <value>切换下一组壁纸</value>
+  </data>
+  <data name="PauseAutoSwitch" xml:space="preserve">
+    <value>暂停自动切换</value>
+  </data>
+  <data name="ExitProgram" xml:space="preserve">
+    <value>退出程序</value>
+  </data>
+  <data name="GroupBoxPreviewHeader" xml:space="preserve">
+    <value>预览 - 选择显示器以进行配置。</value>
+  </data>
+  <data name="RefreshAllCards" xml:space="preserve">
+    <value>刷新所有卡片内容</value>
+  </data>
+  <data name="SwitchNextWallpaper" xml:space="preserve">
+    <value>切换下一张壁纸</value>
+  </data>
+  <data name="RefreshCurrentCard" xml:space="preserve">
+    <value>刷新当前卡片显示内容</value>
+  </data>
+  <data name="ViewCurrentImage" xml:space="preserve">
+    <value>查看当前壁纸图片</value>
+  </data>
+  <data name="OpenDirectoryOfCurrentImage" xml:space="preserve">
+    <value>打开当前壁纸图片所在目录</value>
+  </data>
+  <data name="ViewSettingImage" xml:space="preserve">
+    <value>查看程序设定壁纸图片</value>
+  </data>
+  <data name="OpenDirectoryOfSettingImage" xml:space="preserve">
+    <value>打开程序设定壁纸图片所在目录</value>
+  </data>
+  <data name="ViewLastSettingImage" xml:space="preserve">
+    <value>查看程序上次设定壁纸图片</value>
+  </data>
+  <data name="OpenDirectoryOfLastSettingImage" xml:space="preserve">
+    <value>打开程序上次设定壁纸图片所在目录</value>
+  </data>
+  <data name="GroupBoxHeaderMonitorOptions" xml:space="preserve">
+    <value>显示器选项 - 设定所选择的显示器。</value>
+  </data>
+  <data name="Resolution" xml:space="preserve">
+    <value>分辨率(位置):</value>
+  </data>
+  <data name="AutoSwitchInterval" xml:space="preserve">
+    <value>自动切换的时间间隔(0 表示禁用切换功能)</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="FolderList" xml:space="preserve">
+    <value>文件夹列表</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="RemoveFolder" xml:space="preserve">
+    <value>移除文件夹</value>
+  </data>
+  <data name="ProgramLanguage" xml:space="preserve">
+    <value>显示语言(需要重新启动程序):</value>
+  </data>
+  <data name="WallpaperPosition" xml:space="preserve">
+    <value>壁纸的显示方式:</value>
+  </data>
+  <data name="DoubleClickTray" xml:space="preserve">
+    <value>双击托盘图标执行的操作:</value>
+  </data>
+  <data name="DesktopBackgroundColor" xml:space="preserve">
+    <value>桌面背影颜色(边框颜色):</value>
+  </data>
+  <data name="HEX" xml:space="preserve">
+    <value>十六进制颜色码</value>
+  </data>
+  <data name="SwitchWallpaperOnStartup" xml:space="preserve">
+    <value>程序启动时自动切换壁纸</value>
+  </data>
+  <data name="ShowWindowAtStartup" xml:space="preserve">
+    <value>程序启动时显示主窗口</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>黑色</value>
+  </data>
+  <data name="DarkGray" xml:space="preserve">
+    <value>深灰色</value>
+  </data>
+  <data name="LightGray" xml:space="preserve">
+    <value>浅灰色</value>
+  </data>
+  <data name="White" xml:space="preserve">
+    <value>白色</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>红色</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>绿色</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="Yellow" xml:space="preserve">
+    <value>黄色</value>
+  </data>
+  <data name="Cyan" xml:space="preserve">
+    <value>青色</value>
+  </data>
+  <data name="Purple" xml:space="preserve">
+    <value>紫色</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="Fill" xml:space="preserve">
+    <value>填充</value>
+  </data>
+  <data name="Fit" xml:space="preserve">
+    <value>适应</value>
+  </data>
+  <data name="Stretch" xml:space="preserve">
+    <value>拉伸</value>
+  </data>
+  <data name="Tile" xml:space="preserve">
+    <value>平铺</value>
+  </data>
+  <data name="Center" xml:space="preserve">
+    <value>居中</value>
+  </data>
+  <data name="Span" xml:space="preserve">
+    <value>跨区</value>
+  </data>
+  <data name="ProgramOptions" xml:space="preserve">
+    <value>程序选项</value>
+  </data>
+  <data name="WallpaperOptions" xml:space="preserve">
+    <value>壁纸选项</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>支持</value>
+  </data>
+  <data name="SupportDescription" xml:space="preserve">
+    <value>这是一个完全开源的壁纸切换辅助工具，可以实现为多个显示器屏幕分别设定壁纸图片，并支持定时切换的功能。</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>源代码 (GPL-3.0 license)</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>问题反馈</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>鸣谢</value>
+  </data>
+  <data name="ThanksDescription" xml:space="preserve">
+    <value>该项目依赖以下开源项目提供的组件:</value>
+  </data>
+  <data name="HadUpdate" xml:space="preserve">
+    <value>存在新版本: </value>
+  </data>
+  <data name="IsLatest" xml:space="preserve">
+    <value>已是最新版本</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>正在检查中...</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="GoUpgrade" xml:space="preserve">
+    <value>前往升级</value>
+  </data>
+  <data name="AutoCheckUpdate" xml:space="preserve">
+    <value>程序启动时自动检查更新</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>网络出错！请重试</value>
+  </data>
+  <data name="AutoRunProgram" xml:space="preserve">
+    <value>系统启动时自动运行程序</value>
+  </data>
+</root>

@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TabMonitor" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
+  <data name="TabAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="TabSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>Open main window</value>
+  </data>
+  <data name="SwitchWallpaperSet" xml:space="preserve">
+    <value>Switch next wallpapers</value>
+  </data>
+  <data name="PauseAutoSwitch" xml:space="preserve">
+    <value>Pause auto switch</value>
+  </data>
+  <data name="ExitProgram" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="GroupBoxPreviewHeader" xml:space="preserve">
+    <value>Preview - Choose the monitor to configure.</value>
+  </data>
+  <data name="RefreshAllCards" xml:space="preserve">
+    <value>Refresh all cards</value>
+  </data>
+  <data name="SwitchNextWallpaper" xml:space="preserve">
+    <value>Switch next wallpaper</value>
+  </data>
+  <data name="RefreshCurrentCard" xml:space="preserve">
+    <value>Refresh current card</value>
+  </data>
+  <data name="ViewCurrentImage" xml:space="preserve">
+    <value>View current image</value>
+  </data>
+  <data name="OpenDirectoryOfCurrentImage" xml:space="preserve">
+    <value>Open directory of current image</value>
+  </data>
+  <data name="ViewSettingImage" xml:space="preserve">
+    <value>View setting image</value>
+  </data>
+  <data name="OpenDirectoryOfSettingImage" xml:space="preserve">
+    <value>Open directory of setting image</value>
+  </data>
+  <data name="ViewLastSettingImage" xml:space="preserve">
+    <value>View last setting image</value>
+  </data>
+  <data name="OpenDirectoryOfLastSettingImage" xml:space="preserve">
+    <value>Open directory of last setting image</value>
+  </data>
+  <data name="GroupBoxHeaderMonitorOptions" xml:space="preserve">
+    <value>Monitor options - set the selected monitor.</value>
+  </data>
+  <data name="Resolution" xml:space="preserve">
+    <value>Resolution (Position):</value>
+  </data>
+  <data name="AutoSwitchInterval" xml:space="preserve">
+    <value>Time Interval of Auto Switch (0 disables switching)</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="FolderList" xml:space="preserve">
+    <value>Folder List</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Add Folder</value>
+  </data>
+  <data name="RemoveFolder" xml:space="preserve">
+    <value>Remove Folder</value>
+  </data>
+  <data name="ProgramLanguage" xml:space="preserve">
+    <value>Language (Need to restart the program):</value>
+  </data>
+  <data name="WallpaperPosition" xml:space="preserve">
+    <value>Position of Wallpaper:</value>
+  </data>
+  <data name="DoubleClickTray" xml:space="preserve">
+    <value>Double-click the tray icon to do:</value>
+  </data>
+  <data name="DesktopBackgroundColor" xml:space="preserve">
+    <value>Desktop Background Color (Border color):</value>
+  </data>
+  <data name="HEX" xml:space="preserve">
+    <value>Hex triplet</value>
+  </data>
+  <data name="SwitchWallpaperOnStartup" xml:space="preserve">
+    <value>Switch wallpaper When the program starts</value>
+  </data>
+  <data name="ShowWindowAtStartup" xml:space="preserve">
+    <value>Show main window when the program starts</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="DarkGray" xml:space="preserve">
+    <value>Dark gray</value>
+  </data>
+  <data name="LightGray" xml:space="preserve">
+    <value>Light gray</value>
+  </data>
+  <data name="White" xml:space="preserve">
+    <value>White</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Yellow" xml:space="preserve">
+    <value>Yellow</value>
+  </data>
+  <data name="Cyan" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="Purple" xml:space="preserve">
+    <value>Purple</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>Follow system</value>
+  </data>
+  <data name="Fill" xml:space="preserve">
+    <value>Fill</value>
+  </data>
+  <data name="Fit" xml:space="preserve">
+    <value>Fit</value>
+  </data>
+  <data name="Stretch" xml:space="preserve">
+    <value>Stretch</value>
+  </data>
+  <data name="Tile" xml:space="preserve">
+    <value>Tile</value>
+  </data>
+  <data name="Center" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="Span" xml:space="preserve">
+    <value>Span</value>
+  </data>
+  <data name="ProgramOptions" xml:space="preserve">
+    <value>Program options</value>
+  </data>
+  <data name="WallpaperOptions" xml:space="preserve">
+    <value>Wallpaper options</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="SupportDescription" xml:space="preserve">
+    <value>This is a completely open source wallpaper switch auxiliary tool, can be implemented as multiple monitor screen set wallpaper images respectively, and support the function of timer switch.</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>Source code (GPL-3.0 license)</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>Thanks</value>
+  </data>
+  <data name="ThanksDescription" xml:space="preserve">
+    <value>The project relies on components provided by the following open source projects:</value>
+  </data>
+  <data name="HadUpdate" xml:space="preserve">
+    <value>New version: </value>
+  </data>
+  <data name="IsLatest" xml:space="preserve">
+    <value>Already the latest version</value>
+  </data>
+  <data name="Checking" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="GoUpgrade" xml:space="preserve">
+    <value>Go to upgrade</value>
+  </data>
+  <data name="AutoCheckUpdate" xml:space="preserve">
+    <value>Auto check for updates when the program starts</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Network error! Please try again</value>
+  </data>
+  <data name="AutoRunProgram" xml:space="preserve">
+    <value>Run program automatically when the system starts</value>
+  </data>
+</root>

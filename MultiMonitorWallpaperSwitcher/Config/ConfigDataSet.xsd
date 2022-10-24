@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConfigDataSet" targetNamespace="http://tempuri.org/ConfigDataSet.xsd" xmlns:mstns="http://tempuri.org/ConfigDataSet.xsd" xmlns="http://tempuri.org/ConfigDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ConfigDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ConfigDataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ConfigDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Monitor" msprop:Generator_RowEvHandlerName="MonitorRowChangeEventHandler" msprop:Generator_RowDeletedName="MonitorRowDeleted" msprop:Generator_RowDeletingName="MonitorRowDeleting" msprop:Generator_RowEvArgName="MonitorRowChangeEvent" msprop:Generator_TablePropName="Monitor" msprop:Generator_RowChangedName="MonitorRowChanged" msprop:Generator_UserTableName="Monitor" msprop:Generator_RowChangingName="MonitorRowChanging" msprop:Generator_RowClassName="MonitorRow" msprop:Generator_TableClassName="MonitorDataTable" msprop:Generator_TableVarName="tableMonitor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="device_id" msprop:Generator_ColumnPropNameInTable="device_idColumn" msprop:Generator_ColumnPropNameInRow="device_id" msprop:Generator_UserColumnName="device_id" msprop:Generator_ColumnVarNameInTable="columndevice_id" type="xs:string" />
+              <xs:element name="interval_time" msprop:Generator_ColumnPropNameInTable="interval_timeColumn" msprop:Generator_ColumnPropNameInRow="interval_time" msprop:Generator_UserColumnName="interval_time" msprop:Generator_ColumnVarNameInTable="columninterval_time" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="folder_list" msprop:Generator_ColumnPropNameInTable="folder_listColumn" msprop:Generator_ColumnPropNameInRow="folder_list" msprop:Generator_UserColumnName="folder_list" msprop:Generator_ColumnVarNameInTable="columnfolder_list" type="xs:string" default="&quot;&quot;" minOccurs="0" />
+              <xs:element name="cur_path" msprop:Generator_ColumnPropNameInRow="cur_path" msprop:Generator_ColumnPropNameInTable="cur_pathColumn" msprop:Generator_ColumnVarNameInTable="columncur_path" msprop:Generator_UserColumnName="cur_path" type="xs:string" default="&quot;&quot;" minOccurs="0" />
+              <xs:element name="last_path" msprop:Generator_ColumnPropNameInRow="last_path" msprop:Generator_ColumnPropNameInTable="last_pathColumn" msprop:Generator_ColumnVarNameInTable="columnlast_path" msprop:Generator_UserColumnName="last_path" type="xs:string" default="&quot;&quot;" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="MonitorKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Monitor" />
+      <xs:field xpath="mstns:device_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

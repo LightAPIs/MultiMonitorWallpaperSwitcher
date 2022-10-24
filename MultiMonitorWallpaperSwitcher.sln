@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32916.344
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiMonitorWallpaperSwitcher", "MultiMonitorWallpaperSwitcher\MultiMonitorWallpaperSwitcher.csproj", "{744AEE71-8B79-4AFA-9B63-07EEA0467E6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageResources", "LanguageResources\LanguageResources.csproj", "{EF08EA94-0163-42BB-8501-6D99CF419B84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{744AEE71-8B79-4AFA-9B63-07EEA0467E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744AEE71-8B79-4AFA-9B63-07EEA0467E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{744AEE71-8B79-4AFA-9B63-07EEA0467E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744AEE71-8B79-4AFA-9B63-07EEA0467E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF08EA94-0163-42BB-8501-6D99CF419B84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF08EA94-0163-42BB-8501-6D99CF419B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF08EA94-0163-42BB-8501-6D99CF419B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF08EA94-0163-42BB-8501-6D99CF419B84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {127C1D25-EE89-403D-A2B8-B0C9035528CF}
+	EndGlobalSection
+EndGlobal
