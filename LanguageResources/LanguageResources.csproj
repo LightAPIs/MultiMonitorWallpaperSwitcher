@@ -17,7 +17,7 @@
       <CustomToolNamespace>LanguageResources</CustomToolNamespace>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Resource.zh-CN.resx">
+    <EmbeddedResource Update="Resources\Resource.zh-Hans.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <CustomToolNamespace>LanguageResources</CustomToolNamespace>
     </EmbeddedResource>

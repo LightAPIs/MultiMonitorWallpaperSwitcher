@@ -14,7 +14,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
         {
             this.Add(new CategroryInfo() { Name = Resource.System, Value = "system" });
             this.Add(new CategroryInfo() { Name = "English", Value = "en" });
-            this.Add(new CategroryInfo() { Name = "简体中文", Value = "zh-CN" });
+            this.Add(new CategroryInfo() { Name = "简体中文", Value = "zh-Hans" });
         }
     }
 }

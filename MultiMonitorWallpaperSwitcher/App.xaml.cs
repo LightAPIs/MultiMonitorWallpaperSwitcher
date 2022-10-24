@@ -106,8 +106,8 @@ namespace MultiMonitorWallpaperSwitcher
                 case "en":
                     LanguageResources.Resource.Culture = new System.Globalization.CultureInfo("en");
                     break;
-                case "zh-CN":
-                    LanguageResources.Resource.Culture = new System.Globalization.CultureInfo("zh-CN");
+                case "zh-Hans":
+                    LanguageResources.Resource.Culture = new System.Globalization.CultureInfo("zh-Hans");
                     break;
             }
             //* 否则自动读取系统语言
