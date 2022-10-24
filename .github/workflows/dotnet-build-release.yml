@@ -19,8 +19,8 @@ jobs:
       - name: Get Version
         id: get_version
         run: |
-          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-          echo ::set-output name=VERSION2::${GITHUB_REF#refs/tags/v}
+          echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
+          echo "VERSION2=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Create ChangeLog Text
         id: changelog_text
@@ -46,7 +46,6 @@ jobs:
       - name: Setup NuGet
         shell: pwsh
         run: |
-          dotnet nuget update source
           nuget restore $env:SLN_NAME
       - name: Build .NET App
         run: ./build.bat
@@ -84,5 +83,3 @@ jobs:
           asset_path: ./Build/${{ env.PROJECT_NAME }}_arm64_${{ steps.get_version.outputs.VERSION }}.zip
           asset_name: ${{ env.PROJECT_NAME }}_arm64_${{ steps.get_version.outputs.VERSION }}.zip
           asset_content_type: application/zip
-
-      
