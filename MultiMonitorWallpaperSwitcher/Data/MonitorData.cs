@@ -538,7 +538,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                 bool isExists = false;
                 foreach (var item in Folders)
                 {
-                    if (item.Path == outDir)
+                    if (item.Path == outDir || item.Path.IndexOf(outDir) > -1 || outDir.IndexOf(item.Path) > -1)
                     {
                         isExists = true;
                         break;
