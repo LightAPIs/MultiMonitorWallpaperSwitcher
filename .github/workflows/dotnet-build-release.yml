@@ -1,0 +1,88 @@
+name: dotnet-build-release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  PROJECT_NAME: MultiMonitorWallpaperSwitcher
+  SLN_NAME: MultiMonitorWallpaperSwitcher.sln
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Get Version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+          echo ::set-output name=VERSION2::${GITHUB_REF#refs/tags/v}
+        shell: bash
+      - name: Create ChangeLog Text
+        id: changelog_text
+        uses: loopwerk/tag-changelog@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config_file: .github/scripts/tag-changelog-config.js
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog_text.outputs.changes }}
+          draft: false
+          prerelease: false
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Setup NuGet
+        shell: pwsh
+        run: |
+          dotnet nuget update source
+          nuget restore $env:SLN_NAME
+      - name: Build .NET App
+        run: ./build.bat
+        shell: pwsh
+      - name: Package
+        run: |
+          if (-not (Test-Path ./Build)) { New-Item -Path ./ -Name Build -ItemType Directory }
+          Compress-Archive -Path "./publish/x86/*" -DestinationPath "./Build/${{ env.PROJECT_NAME }}_x86_${{ steps.get_version.outputs.VERSION }}.zip"
+          Compress-Archive -Path "./publish/x64/*" -DestinationPath "./Build/${{ env.PROJECT_NAME }}_x64_${{ steps.get_version.outputs.VERSION }}.zip"
+          Compress-Archive -Path "./publish/arm64/*" -DestinationPath "./Build/${{ env.PROJECT_NAME }}_arm64_${{ steps.get_version.outputs.VERSION }}.zip"
+      - name: Upload Release_x86
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Build/${{ env.PROJECT_NAME }}_x86_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ${{ env.PROJECT_NAME }}_x86_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
+      - name: Upload Release_x64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Build/${{ env.PROJECT_NAME }}_x64_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ${{ env.PROJECT_NAME }}_x64_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
+      - name: Upload Release_arm64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Build/${{ env.PROJECT_NAME }}_arm64_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ${{ env.PROJECT_NAME }}_arm64_${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
+
+      
