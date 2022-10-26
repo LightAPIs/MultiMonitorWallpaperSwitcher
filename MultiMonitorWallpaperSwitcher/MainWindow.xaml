@@ -163,29 +163,31 @@
                                         <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding SelectedItem.Folders, ElementName=MonitorListBox}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
-                                                    <DockPanel>
-                                                        <CheckBox IsChecked="{Binding Enabled}" HorizontalAlignment="Left" Command="{Binding CheckCommand}" CommandParameter="{Binding Path}"/>
-                                                        <TextBlock Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 0 0"/>
-                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <CheckBox Grid.Column="0" IsChecked="{Binding Enabled}" HorizontalAlignment="Left" Command="{Binding CheckCommand}" CommandParameter="{Binding Path}"/>
+                                                        <TextBlock Grid.Column="1" Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 5 0"/>
+                                                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                                                             <TextBlock Text="{Binding Path=Count, Converter={StaticResource CountToStringConverter}}"/>
                                                             <Button
-                                                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                                                            Cursor="Hand"
-                                                            Width="{StaticResource ButtonSize}"
-                                                            Height="{StaticResource ButtonSize}"
-                                                            Padding="0"
-                                                            ToolTip="{x:Static lang:Resource.RemoveFolder}"
-                                                            Command="{Binding RemoveCommand}"
-                                                            CommandParameter="{Binding Path}"
-                                                            Margin="5,0,0,0"
-                                                            HorizontalAlignment="Right">
-                                                                <materialDesign:PackIcon
-                                                                    Kind="Delete"
-                                                                    Height="{StaticResource IconSize}"
-                                                                    Width="{StaticResource IconSize}"/>
+                                                                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                                                Cursor="Hand"
+                                                                Width="{StaticResource ButtonSize}"
+                                                                Height="{StaticResource ButtonSize}"
+                                                                Padding="0"
+                                                                ToolTip="{x:Static lang:Resource.RemoveFolder}"
+                                                                Command="{Binding RemoveCommand}"
+                                                                CommandParameter="{Binding Path}"
+                                                                Margin="5,0,0,0"
+                                                                HorizontalAlignment="Right">
+                                                                <materialDesign:PackIcon Kind="Delete" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
                                                             </Button>
                                                         </StackPanel>
-                                                    </DockPanel>
+                                                    </Grid>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
