@@ -141,6 +141,35 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
         }
 
         /// <summary>
+        /// 获取目录下的图片数量
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <returns></returns>
+        public static uint GetImagesCountFromPath(string dir)
+        {
+            uint count = 0;
+            if (Directory.Exists(dir))
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(dir);
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    string ext = file.Extension.ToLower();
+                    if (ExtDic.ContainsKey(ext))
+                    {
+                        count++;
+                    }
+                }
+
+                List<string> oDirs = new List<DirectoryInfo>(dirInfo.GetDirectories()).ConvertAll<string>(x => x.FullName);
+                foreach (string oDir in oDirs)
+                {
+                    count += GetImagesCountFromPath(oDir);
+                }
+            }
+            return count;
+        }
+
+        /// <summary>
         /// 设置随机壁纸
         /// </summary>
         /// <param name="mRow"></param>

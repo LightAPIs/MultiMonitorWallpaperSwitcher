@@ -418,6 +418,12 @@ namespace MultiMonitorWallpaperSwitcher.Data
                         {
                             WallpaperPath = wallpaperPath;
                         }
+
+                        //* 刷新目录中的图片数量
+                        foreach (var item in Folders)
+                        {
+                            item.RefreshCount();
+                        }
                     }
                 };
             }
@@ -650,6 +656,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
     {
         private string fPath = string.Empty;
         private bool fEnabled = false;
+        private uint fCount = 0;
         public GenericCommand RemoveCommand { get; set; }
         public GenericCommand CheckCommand { get; set; }
 
@@ -673,6 +680,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                 if (value != fPath)
                 {
                     fPath = value;
+                    Count = WallpaperProc.GetImagesCountFromPath(fPath);
                     Notify(nameof(Path));
                 }
             }
@@ -689,6 +697,24 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     Notify(nameof(Enabled));
                 }
             }
+        }
+
+        public uint Count
+        {
+            get { return fCount; }
+            set
+            {
+                if (fCount != value)
+                {
+                    fCount = value;
+                    Notify(nameof(Count));
+                }
+            }
+        }
+
+        public void RefreshCount()
+        {
+            Count = WallpaperProc.GetImagesCountFromPath(fPath);
         }
 
         public void Parse(string str)
