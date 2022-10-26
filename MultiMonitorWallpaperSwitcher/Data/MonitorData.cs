@@ -618,7 +618,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
 
         private void OpenImageDir(string filePath)
         {
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            if (!string.IsNullOrEmpty(filePath))
             {
                 DirectoryInfo? dir = Directory.GetParent(filePath);
                 if (dir != null)
