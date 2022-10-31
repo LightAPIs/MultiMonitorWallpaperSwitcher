@@ -30,22 +30,29 @@ namespace MultiMonitorWallpaperSwitcher.UIConverter
             return null;
         }
 
-        private BitmapImage GetImage(string imagePath)
+        private BitmapImage? GetImage(string imagePath)
         {
-            BitmapImage bi = new BitmapImage();
-            if (File.Exists(imagePath))
+            try
             {
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                using (Stream ms = new MemoryStream(File.ReadAllBytes(imagePath)))
+                BitmapImage bi = new BitmapImage();
+                if (File.Exists(imagePath))
                 {
-                    bi.StreamSource = ms;
-                    bi.DecodePixelHeight = 120;
-                    bi.EndInit();
-                    bi.Freeze();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    using (Stream ms = new MemoryStream(File.ReadAllBytes(imagePath)))
+                    {
+                        bi.StreamSource = ms;
+                        bi.DecodePixelHeight = 120;
+                        bi.EndInit();
+                        bi.Freeze();
+                    }
                 }
+                return bi;
             }
-            return bi;
+            catch
+            {
+                return null;
+            }
         }
     }
 }
