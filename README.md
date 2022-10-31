@@ -28,7 +28,7 @@ This tool can work on Windows8/8.1, Windows10 and Windows11 systems.
 
 ## Install
 
-Go to the [Releases](https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher/releases/latest) to download the program package `zip` file unzip it, run `MultiMonitorWallpaperSwitcher.exe`.
+Go to the [Releases](https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher/releases/latest) to download the program package `zip` file and unzip it, run `MultiMonitorWallpaperSwitcher.exe`.
 
 ## Preview
 
