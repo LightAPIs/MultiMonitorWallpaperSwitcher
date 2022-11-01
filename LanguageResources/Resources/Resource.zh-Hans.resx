@@ -321,4 +321,7 @@
   <data name="SelectImage" xml:space="preserve">
     <value>选择图片作为壁纸</value>
   </data>
+  <data name="SetWallpaperByFolder" xml:space="preserve">
+    <value>将壁纸设置为该文件夹下的图片</value>
+  </data>
 </root>

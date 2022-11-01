@@ -52,9 +52,10 @@ namespace MultiMonitorWallpaperSwitcher.TaskScheduler
             if (monitorItems.Count > 0)
             {
                 ConfigDataSet.MonitorDataTable monitorData = Glob.Conf.GetAllMonitor();
+                WallpaperProc.SetUserEnvironmentValue();
 
                 DateTime now = DateTime.Now;
-                foreach ( var item in monitorItems )
+                foreach (var item in monitorItems)
                 {
                     var mData = ConfigDataSet.GetMonitorRowFromDeviceId(monitorData, item.DeviceId);
                     if (mData != null)
@@ -160,7 +161,7 @@ namespace MultiMonitorWallpaperSwitcher.TaskScheduler
             if (!string.IsNullOrEmpty(imageFile) && File.Exists(imageFile))
             {
                 var monitorItems = MonitorProc.GetMonitorItems();
-                if (monitorItems.Count > 0 )
+                if (monitorItems.Count > 0)
                 {
                     WallpaperProc.SetUserEnvironmentValue();
                     DateTime now = DateTime.Now;
@@ -175,6 +176,38 @@ namespace MultiMonitorWallpaperSwitcher.TaskScheduler
                 }
             }
             SetNextTask();
+        }
+
+        /// <summary>
+        /// 通过指定文件夹路径执行单个任务
+        /// </summary>
+        /// <param name="deviceId">设备 ID</param>
+        /// <param name="intervalTime"></param>
+        /// <param name="folder"></param>
+        /// <returns>返回所设置的壁纸路径</returns>
+        public static string ExecuteOneTaskByFolder(string deviceId, int intervalTime, string folder)
+        {
+            StopAllTasks();
+            string imageFile = string.Empty;
+            if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))
+            {
+                var monitorItems = MonitorProc.GetMonitorItems();
+                if (monitorItems.Count > 0)
+                {
+                    WallpaperProc.SetUserEnvironmentValue();
+                    DateTime now = DateTime.Now;
+                    foreach (var item in monitorItems)
+                    {
+                        if (deviceId == item.DeviceId)
+                        {
+                            Glob.ExcutionInfo.SetTime(deviceId, now, intervalTime);
+                            imageFile = WallpaperProc.SetWallpaperByFolder(deviceId, folder);
+                        }
+                    }
+                }
+            }
+            SetNextTask();
+            return imageFile;
         }
     }
 }

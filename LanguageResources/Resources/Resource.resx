@@ -321,4 +321,7 @@
   <data name="SelectImage" xml:space="preserve">
     <value>Select picture as wallpaper</value>
   </data>
+  <data name="SetWallpaperByFolder" xml:space="preserve">
+    <value>Set wallpaper to the folder images</value>
+  </data>
 </root>

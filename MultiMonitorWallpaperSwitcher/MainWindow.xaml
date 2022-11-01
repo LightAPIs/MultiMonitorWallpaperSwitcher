@@ -170,7 +170,13 @@
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
                                                         <CheckBox Grid.Column="0" IsChecked="{Binding Enabled}" HorizontalAlignment="Left" Command="{Binding CheckCommand}" CommandParameter="{Binding Path}"/>
-                                                        <TextBlock Grid.Column="1" Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 5 0"/>
+                                                        <TextBlock Grid.Column="1" Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 5 0">
+                                                            <TextBlock.ContextMenu>
+                                                                <ContextMenu>
+                                                                    <MenuItem Header="{x:Static lang:Resource.SetWallpaperByFolder}" Command="{Binding SetWallpaperCommand}" CommandParameter="{Binding Path}"/>
+                                                                </ContextMenu>
+                                                            </TextBlock.ContextMenu>
+                                                        </TextBlock>
                                                         <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                                                             <TextBlock Text="{Binding Path=Count, Converter={StaticResource CountToStringConverter}}"/>
                                                             <Button

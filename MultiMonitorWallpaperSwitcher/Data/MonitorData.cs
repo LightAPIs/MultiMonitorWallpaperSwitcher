@@ -180,7 +180,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
             {
                 if (!string.IsNullOrEmpty(folder))
                 {
-                    FolderData fd = new FolderData(RemoveFolder, CheckFolder);
+                    FolderData fd = new FolderData(RemoveFolder, CheckFolder, SetWallpaperFromFolder);
                     fd.Parse(folder);
                     if (fd.Path.Length > 0)
                     {
@@ -555,7 +555,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                 {
                     mFolderList += (mFolderList.Length > 0 ? "|" : "") + outDir + "*1";
                     Glob.Conf.UpdateMonitorFolderList(mDeviceId, mFolderList);
-                    Folders.Add(new FolderData(RemoveFolder, CheckFolder)
+                    Folders.Add(new FolderData(RemoveFolder, CheckFolder, SetWallpaperFromFolder)
                     {
                         Path = outDir,
                         Enabled = true,
@@ -610,6 +610,16 @@ namespace MultiMonitorWallpaperSwitcher.Data
             }
         }
 
+        private void SetWallpaperFromFolder(object parameter)
+        {
+            string folder = parameter.ToString()!;
+            string imageFile = TaskProc.ExecuteOneTaskByFolder(mDeviceId, mIntervalTime, folder);
+            if (!string.IsNullOrEmpty(imageFile))
+            {
+                WallpaperPath = imageFile;
+            }
+        }
+
         private void OpenImageFile(string filePath)
         {
             if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
@@ -657,10 +667,11 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private string fPath = string.Empty;
         private bool fEnabled = false;
         private uint fCount = 0;
-        public GenericCommand RemoveCommand { get; set; }
-        public GenericCommand CheckCommand { get; set; }
+        public GenericCommand RemoveCommand { get; }
+        public GenericCommand CheckCommand { get; }
+        public GenericCommand SetWallpaperCommand { get; }
 
-        public FolderData(GenericCommand.HandlerDelegate del, GenericCommand.HandlerDelegate check)
+        public FolderData(GenericCommand.HandlerDelegate del, GenericCommand.HandlerDelegate check, GenericCommand.HandlerDelegate setWallpaper)
         {
             RemoveCommand = new GenericCommand()
             {
@@ -669,6 +680,10 @@ namespace MultiMonitorWallpaperSwitcher.Data
             CheckCommand = new GenericCommand()
             {
                 Handler = check
+            };
+            SetWallpaperCommand = new GenericCommand()
+            {
+                Handler = setWallpaper
             };
         }
 

@@ -57,6 +57,20 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
             }
         }
 
+        /// <summary>
+        /// 通过文件夹为显示器设定壁纸
+        /// </summary>
+        /// <param name="deviceId"></param>
+        /// <param name="folder"></param>
+        /// <returns>返回设定的图片路径</returns>
+        public static string SetWallpaperByFolder(string deviceId, string folder)
+        {
+            List<string> list = new List<string>() { folder };
+            string imageFile = GetRandomImageFromPathList(list);
+            SetWallpaper(deviceId, imageFile);
+            return imageFile;
+        }
+
         private static string GetRandomImageFromPathList(List<string> dirs)
         {
             List<string> files = GetImageFilesFromPathList(dirs);

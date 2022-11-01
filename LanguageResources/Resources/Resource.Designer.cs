@@ -457,6 +457,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Set wallpaper to the folder images 的本地化字符串。
+        /// </summary>
+        public static string SetWallpaperByFolder {
+            get {
+                return ResourceManager.GetString("SetWallpaperByFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Open main window 的本地化字符串。
         /// </summary>
         public static string ShowWindow {
