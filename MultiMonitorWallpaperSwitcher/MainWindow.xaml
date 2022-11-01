@@ -107,7 +107,7 @@
                                     <DataTemplate>
                                         <materialDesign:Card Width="{Binding Width}" Height="{Binding Height}" ToolTip="{Binding WallpaperPath}" Cursor="Hand" UniformCornerRadius="1" Background="{Binding Path=DataContext.DesktopBackgroundColor, ElementName=WindowTabControl, Converter={StaticResource ColorToBrushConverter}}" ClipToBounds="True">
                                             <materialDesign:Card.ContextMenu>
-                                                <ContextMenu>
+                                                <ContextMenu FontFamily="Microsoft YaHei">
                                                     <MenuItem Header="{x:Static lang:Resource.SwitchNextWallpaper}" Command="{Binding SwitchNextWallpaper}"/>
                                                     <MenuItem Header="{x:Static lang:Resource.SetSpecifiedImage}" Command="{Binding SetSpecifiedImage}"/>
                                                     <MenuItem Header="{x:Static lang:Resource.RefreshCurrentCard}" Command="{Binding RefreshCardContent}"/>
@@ -172,7 +172,7 @@
                                                         <CheckBox Grid.Column="0" IsChecked="{Binding Enabled}" HorizontalAlignment="Left" Command="{Binding CheckCommand}" CommandParameter="{Binding Path}"/>
                                                         <TextBlock Grid.Column="1" Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 5 0">
                                                             <TextBlock.ContextMenu>
-                                                                <ContextMenu>
+                                                                <ContextMenu FontFamily="Microsoft YaHei">
                                                                     <MenuItem Header="{x:Static lang:Resource.SetWallpaperByFolder}" Command="{Binding SetWallpaperCommand}" CommandParameter="{Binding Path}"/>
                                                                 </ContextMenu>
                                                             </TextBlock.ContextMenu>
