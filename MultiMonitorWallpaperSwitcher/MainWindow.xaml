@@ -134,11 +134,17 @@
                             Grid.Row="1">
                             <ScrollViewer x:Name="MonitorScrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="MonitorScrollViewer_PreviewMouseWheel">
                                 <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" HorizontalContentAlignment="Stretch" Visibility="{Binding ElementName=MonitorListBox, Path=SelectedIndex, Converter={StaticResource ProfileConverter}}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.Resolution}"/>
-                                        <TextBlock Margin="10 0 0 0" Text="{Binding ElementName=MonitorListBox, Path=SelectedItem.ResolutionText}"/>
-                                    </StackPanel>
-                                    <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" uiconverter:IntervalAttachedProperties.IsOnlyNumber="True" uiconverter:EnterAttachedProperties.EnterPress="True"  materialDesign:HintAssist.Hint="{x:Static lang:Resource.AutoSwitchInterval}" materialDesign:TextFieldAssist.SuffixText="{x:Static lang:Resource.Minutes}" Text="{Binding Path=SelectedItem.IntervalTime, ElementName=MonitorListBox, Converter={StaticResource IntToStringConverter}}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="{x:Static lang:Resource.Resolution}"/>
+                                            <TextBlock Margin="5 0 0 0" Text="{Binding ElementName=MonitorListBox, Path=SelectedItem.ResolutionText}"/>
+                                        </StackPanel>
+                                        <TextBox Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" uiconverter:IntervalAttachedProperties.IsOnlyNumber="True" uiconverter:EnterAttachedProperties.EnterPress="True"  materialDesign:HintAssist.Hint="{x:Static lang:Resource.AutoSwitchInterval}" materialDesign:TextFieldAssist.SuffixText="{x:Static lang:Resource.Minutes}" Text="{Binding Path=SelectedItem.IntervalTime, ElementName=MonitorListBox, Converter={StaticResource IntToStringConverter}}"/>
+                                    </Grid>
                                     <GroupBox>
                                         <GroupBox.Header>
                                             <StackPanel Orientation="Horizontal">
