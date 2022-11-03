@@ -15,9 +15,43 @@ using MultiMonitorWallpaperSwitcher.Profile;
 using MultiMonitorWallpaperSwitcher.Wallpaper;
 using MultiMonitorWallpaperSwitcher.Update;
 using MultiMonitorWallpaperSwitcher.RegistryMgr;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace MultiMonitorWallpaperSwitcher.Data
 {
+    [ComImport]
+    [Guid("00021401-0000-0000-C000-000000000046")]
+    internal class ShellLink
+    {
+    }
+
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("000214F9-0000-0000-C000-000000000046")]
+    internal interface IShellLink
+    {
+        void GetPath([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile, int cchMaxPath, out IntPtr pfd, int fFlags);
+        void GetIDList(out IntPtr ppidl);
+        void SetIDList(IntPtr pidl);
+        void GetDescription([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszName, int cchMaxName);
+        void SetDescription([MarshalAs(UnmanagedType.LPWStr)] string pszName);
+        void GetWorkingDirectory([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszDir, int cchMaxPath);
+        void SetWorkingDirectory([MarshalAs(UnmanagedType.LPWStr)] string pszDir);
+        void GetArguments([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszArgs, int cchMaxPath);
+        void SetArguments([MarshalAs(UnmanagedType.LPWStr)] string pszArgs);
+        void GetHotkey(out short pwHotkey);
+        void SetHotkey(short wHotkey);
+        void GetShowCmd(out int piShowCmd);
+        void SetShowCmd(int iShowCmd);
+        void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath, int cchIconPath, out int piIcon);
+        void SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string pszIconPath, int iIcon);
+        void SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string pszPathRel, int dwReserved);
+        void Resolve(IntPtr hwnd, int fFlags);
+        void SetPath([MarshalAs(UnmanagedType.LPWStr)] string pszFile);
+    }
+
     public class ProfileData : INotifyPropertyChanged
     {
         private readonly string pVersion;
@@ -77,7 +111,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
             pDoubleClickTray = UserProfile.GetDoubleClickTray();
             pDesktopBackgroundMode = UserProfile.GetDesktopBackgroundMode();
             pDesktopBackgroundColor = UserProfile.GetDesktopBackgroundColor();
-            pDisableQualityReduction= UserProfile.GetDisableQualityReduction();
+            pDisableQualityReduction = UserProfile.GetDisableQualityReduction();
 
             if (autoCheckUpdate)
             {
@@ -434,6 +468,41 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     pCheckButtonKind = value;
                     Notify(nameof(CheckButtonKind));
                 }
+            }
+        }
+
+        /// <summary>
+        /// From: https://stackoverflow.com/a/14632782
+        /// </summary>
+        public ICommand CreateShortcut
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                        string shortcutFile = desktopPath + @"\Multi-Monitor Wallpaper Switcher.lnk";
+                        if (!File.Exists(shortcutFile))
+                        {
+                            ProcessModule? pModule = Process.GetCurrentProcess().MainModule;
+                            if (pModule != null)
+                            {
+                                string? programPath = pModule.FileName;
+                                if (!string.IsNullOrEmpty(programPath))
+                                {
+                                    IShellLink link = (IShellLink)new ShellLink();
+                                    link.SetDescription("Multi-Monitor Wallpaper Switcher");
+                                    link.SetPath(programPath);
+
+                                    IPersistFile file = (IPersistFile)link;
+                                    file.Save(shortcutFile, false);
+                                }
+                            }
+                        }
+                    }
+                };
             }
         }
 

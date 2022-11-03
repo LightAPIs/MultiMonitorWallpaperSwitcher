@@ -327,4 +327,7 @@
   <data name="DisableQualityReduction" xml:space="preserve">
     <value>Disable desktop wallpaper JPEG quality reduction (Valid only for Windows 10 and later)</value>
   </data>
+  <data name="CreateDesktopShortcut" xml:space="preserve">
+    <value>Create Desktop Shortcut</value>
+  </data>
 </root>

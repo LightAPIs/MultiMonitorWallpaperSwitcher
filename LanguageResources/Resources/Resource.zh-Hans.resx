@@ -327,4 +327,7 @@
   <data name="DisableQualityReduction" xml:space="preserve">
     <value>禁用桌面壁纸 JPEG 质量降低 (仅适用于 Windows 10 及更高版本)</value>
   </data>
+  <data name="CreateDesktopShortcut" xml:space="preserve">
+    <value>创建桌面快捷方式</value>
+  </data>
 </root>

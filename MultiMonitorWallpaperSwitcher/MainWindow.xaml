@@ -252,6 +252,12 @@
                                         <CheckBox IsChecked="{Binding RunAtSystemStart}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.AutoRunProgram}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding CreateShortcut}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Tag" VerticalAlignment="Center"/>
+                                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.CreateDesktopShortcut}"/>
+                                        </StackPanel>
+                                    </Button>
                                 </ListBox>
                             </GroupBox>
                             <GroupBox Grid.Row="1" Header="{x:Static lang:Resource.WallpaperOptions}">
@@ -332,13 +338,13 @@
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"/>
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.SourceCode}"/>
                                     </StackPanel>
                                 </Button>
                                 <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher/issues">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="LightbulbQuestion"/>
+                                        <materialDesign:PackIcon Kind="LightbulbQuestion"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.Feedback}"/>
                                     </StackPanel>
                                 </Button>
@@ -365,13 +371,13 @@
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/fluentscheduler/FluentScheduler">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"/>
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="FluentScheduler (BSD)"/>
                                     </StackPanel>
                                 </Button>
                                 <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/hardcodet/wpf-notifyicon">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"/>
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Hardcodet NotifyIcon for WPF (CPOL-1.02)"/>
                                     </StackPanel>
                                 </Button>
@@ -383,13 +389,13 @@
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"/>
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Material Design In XAML Toolkit (MIT)"/>
                                     </StackPanel>
                                 </Button>
                                 <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/JamesNK/Newtonsoft.Json">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"/>
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Json.NET (MIT)"/>
                                     </StackPanel>
                                 </Button>
@@ -401,7 +407,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://www.sqlite.org/copyright.html">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Database"/>
+                                        <materialDesign:PackIcon Kind="Database"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="SQLite"/>
                                     </StackPanel>
                                 </Button>

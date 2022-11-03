@@ -142,6 +142,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Create Desktop Shortcut 的本地化字符串。
+        /// </summary>
+        public static string CreateDesktopShortcut {
+            get {
+                return ResourceManager.GetString("CreateDesktopShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Custom 的本地化字符串。
         /// </summary>
         public static string Custom {
