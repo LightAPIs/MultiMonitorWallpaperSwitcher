@@ -178,6 +178,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Disable desktop wallpaper JPEG quality reduction (Valid only for Windows 10 and later) 的本地化字符串。
+        /// </summary>
+        public static string DisableQualityReduction {
+            get {
+                return ResourceManager.GetString("DisableQualityReduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Double-click the tray icon to do: 的本地化字符串。
         /// </summary>
         public static string DoubleClickTray {

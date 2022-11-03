@@ -10,27 +10,25 @@ namespace MultiMonitorWallpaperSwitcher.RegistryMgr
 {
     public class RegistryHandler
     {
-        private readonly string StartupRootKeyPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-        private string programName;
-        public RegistryHandler(string name)
+        protected string RootKeyPath;
+        public RegistryHandler(string rootKeyPath)
         {
-            programName = name;
+            RootKeyPath = rootKeyPath;
         }
 
-        /// <summary>
-        /// 设置自启动
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public bool SetStartup(string path)
+        protected bool SetValue(string name, object value, RegistryValueKind valueKind = RegistryValueKind.String)
         {
+            if (string.IsNullOrEmpty(RootKeyPath))
+            {
+                return false;
+            }
+
             try
             {
-                // 在启动路径下写入键值对
-                RegistryKey? regkey = Registry.CurrentUser.OpenSubKey(StartupRootKeyPath, true);
+                RegistryKey? regkey = Registry.CurrentUser.OpenSubKey(RootKeyPath, true);
                 if (regkey != null)
                 {
-                    regkey.SetValue(programName, path);
+                    regkey.SetValue(name, value, valueKind);
                     regkey.Close();
                     return true;
                 }
@@ -42,29 +40,23 @@ namespace MultiMonitorWallpaperSwitcher.RegistryMgr
             }
         }
 
-        /// <summary>
-        /// 取消自启动
-        /// </summary>
-        /// <returns></returns>
-        public void RemoveStartup()
+        protected void RemoveValue(string keyName)
         {
             try
             {
-                // 删除启动路径下指定键值
-                RegistryKey? regkey = Registry.CurrentUser.OpenSubKey(StartupRootKeyPath, true);
+                RegistryKey? regkey = Registry.CurrentUser.OpenSubKey(RootKeyPath, true);
                 if (regkey != null)
                 {
                     string[] subNames = regkey.GetValueNames();
                     foreach (string readName in subNames)
                     {
-                        if (readName == programName)
+                        if (readName == keyName)
                         {
                             regkey.DeleteValue(readName);
                             regkey.Close();
                         }
                     }
                 }
-
             }
             catch { }
         }

@@ -39,6 +39,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private DoubleClickTrayCommandEnum pDoubleClickTray;
         private DesktopBackgroundModeEnum pDesktopBackgroundMode;
         private uint pDesktopBackgroundColor;
+        private bool pDisableQualityReduction;
 
         /// <summary>
         /// 版本格式
@@ -76,6 +77,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
             pDoubleClickTray = UserProfile.GetDoubleClickTray();
             pDesktopBackgroundMode = UserProfile.GetDesktopBackgroundMode();
             pDesktopBackgroundColor = UserProfile.GetDesktopBackgroundColor();
+            pDisableQualityReduction= UserProfile.GetDisableQualityReduction();
 
             if (autoCheckUpdate)
             {
@@ -195,7 +197,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     UserProfile.SetRunAtSystemStart(pRunAtSystemStart);
                     Notify(nameof(RunAtSystemStart));
 
-                    RegistryHandler regHandler = new RegistryHandler("Multi-Monitor Wallpaper Switcher");
+                    StartupRegistry regHandler = new StartupRegistry("Multi-Monitor Wallpaper Switcher");
                     if (pRunAtSystemStart)
                     {
                         ProcessModule? pModule = Process.GetCurrentProcess().MainModule;
@@ -312,6 +314,33 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     UserProfile.SetDesktopBackgroundColor(pDesktopBackgroundColor);
                     Notify(nameof(DesktopBackgroundColor));
                     WallpaperProc.SetDesktopBackgroundColor();
+                }
+            }
+        }
+
+        public bool DisableQualityReduction
+        {
+            get
+            {
+                return pDisableQualityReduction;
+            }
+            set
+            {
+                if (pDisableQualityReduction != value)
+                {
+                    pDisableQualityReduction = value;
+                    UserProfile.SetDisableQualityReduction(pDisableQualityReduction);
+                    Notify(nameof(DisableQualityReduction));
+
+                    QualityRegistry regHandler = new QualityRegistry();
+                    if (pDisableQualityReduction)
+                    {
+                        regHandler.SetQuality();
+                    }
+                    else
+                    {
+                        regHandler.RemoveQuality();
+                    }
                 }
             }
         }

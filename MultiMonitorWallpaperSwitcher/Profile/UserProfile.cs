@@ -36,7 +36,9 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             // 自动检查更新
             { "AutoCheckAtStartup", "False" },
             // 开机自启动
-            { "RunAtSystemStart", "False" }
+            { "RunAtSystemStart", "False" },
+            // 禁用桌面壁纸 JPEG 质量降低 - 仅 Windows 10 以上有效
+            { "DisableQualityReduction", "False" }
         };
 
         /// <summary>
@@ -216,6 +218,16 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         }
 
         /// <summary>
+        /// 设置是否禁用桌面壁纸质量降低
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool SetDisableQualityReduction(bool value)
+        {
+            return SetValue("DisableQualityReduction", value.ToString());
+        }
+
+        /// <summary>
         /// 获取语言 ID
         /// </summary>
         /// <returns></returns>
@@ -364,6 +376,23 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         public static bool GetRunAtSystemStart()
         {
             string value = GetValue("RunAtSystemStart", "False");
+            try
+            {
+                return Convert.ToBoolean(value);
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 获取是否禁用桌面壁纸质量降低
+        /// </summary>
+        /// <returns></returns>
+        public static bool GetDisableQualityReduction()
+        {
+            string value = GetValue("DisableQualityReduction", "False");
             try
             {
                 return Convert.ToBoolean(value);

@@ -324,4 +324,7 @@
   <data name="SetWallpaperByFolder" xml:space="preserve">
     <value>Set wallpaper to the folder images</value>
   </data>
+  <data name="DisableQualityReduction" xml:space="preserve">
+    <value>Disable desktop wallpaper JPEG quality reduction (Valid only for Windows 10 and later)</value>
+  </data>
 </root>

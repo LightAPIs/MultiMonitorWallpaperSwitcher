@@ -270,6 +270,10 @@
                                         <TextBox VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:TextFieldAssist.PrefixText="#" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HEX}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding DesktopBackgroundColor}" IsEnabled="{Binding Path=DesktopBackgroundMode, Converter={StaticResource BackgroundModeConverter}}" uiconverter:HexStringAttachedProperties.IsHexString="True" uiconverter:EnterAttachedProperties.EnterPress="True" MaxLength="6" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
                                         <Rectangle Margin="10,0,0,0" Fill="{Binding Path=DesktopBackgroundColor, Converter={StaticResource ColorToBrushConverter}}" Width="40" Height="40" RadiusX="25" RadiusY="25"/>
                                     </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding DisableQualityReduction}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <TextBlock Text="{x:Static lang:Resource.DisableQualityReduction}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </StackPanel>
                                 </ListBox>
                             </GroupBox>
                         </Grid>
