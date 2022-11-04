@@ -322,12 +322,15 @@
     <value>选择图片作为壁纸</value>
   </data>
   <data name="SetWallpaperByFolder" xml:space="preserve">
-    <value>将壁纸设置为该文件夹下的图片</value>
+    <value>将壁纸设置为此文件夹下的图片</value>
   </data>
   <data name="DisableQualityReduction" xml:space="preserve">
     <value>禁用桌面壁纸 JPEG 质量降低 (仅适用于 Windows 10 及更高版本)</value>
   </data>
   <data name="CreateDesktopShortcut" xml:space="preserve">
     <value>创建桌面快捷方式</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打开此文件夹</value>
   </data>
 </root>

@@ -330,4 +330,7 @@
   <data name="CreateDesktopShortcut" xml:space="preserve">
     <value>Create Desktop Shortcut</value>
   </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open this folder</value>
+  </data>
 </root>

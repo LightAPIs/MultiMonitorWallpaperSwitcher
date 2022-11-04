@@ -727,6 +727,27 @@ namespace MultiMonitorWallpaperSwitcher.Data
             }
         }
 
+        public ICommand OpenFolder
+        {
+            get
+            {
+                return new ContextCommand
+                {
+                    CommandAction = _paramater =>
+                    {
+                        if (Directory.Exists(fPath))
+                        {
+                            try
+                            {
+                                Process.Start("explorer.exe", fPath);
+                            }
+                            catch (Exception) { }
+                        }
+                    }
+                };
+            }
+        }
+
         public void RefreshCount()
         {
             Count = WallpaperProc.GetImagesCountFromPath(fPath);

@@ -376,6 +376,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Open this folder 的本地化字符串。
+        /// </summary>
+        public static string OpenFolder {
+            get {
+                return ResourceManager.GetString("OpenFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Pause auto switch 的本地化字符串。
         /// </summary>
         public static string PauseAutoSwitch {
