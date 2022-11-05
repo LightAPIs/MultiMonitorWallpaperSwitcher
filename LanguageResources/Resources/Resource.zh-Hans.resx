@@ -333,4 +333,7 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>打开此文件夹</value>
   </data>
+  <data name="ClickTray" xml:space="preserve">
+    <value>单击托盘图标执行的操作:</value>
+  </data>
 </root>

@@ -15,7 +15,7 @@
                 <Separator/>
                 <MenuItem Header="{x:Static lang:Resource.ExitProgram}" Command="{Binding ExitApplicationCommand}"/>
             </ContextMenu>
-            <tb:TaskbarIcon x:Key="Taskbar" ToolTipText="Multi-Monitor Wallpaper Switcher" IconSource="{Binding IconFile}" DoubleClickCommand="{Binding DoubleCustomCommand}" ContextMenu="{StaticResource TrayMenu}">
+            <tb:TaskbarIcon x:Key="Taskbar" ToolTipText="Multi-Monitor Wallpaper Switcher" IconSource="{Binding IconFile}" LeftClickCommand="{Binding ClickCustomCommand}" DoubleClickCommand="{Binding DoubleCustomCommand}" ContextMenu="{StaticResource TrayMenu}">
                 <tb:TaskbarIcon.DataContext>
                     <taskbar:NotifyIconViewModel/>
                 </tb:TaskbarIcon.DataContext>

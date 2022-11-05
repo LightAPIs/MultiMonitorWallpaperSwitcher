@@ -89,7 +89,7 @@ namespace MultiMonitorWallpaperSwitcher.Taskbar
             }
         }
 
-        public ICommand DoubleCustomCommand
+        public ICommand ClickCustomCommand
         {
             get
             {
@@ -97,7 +97,7 @@ namespace MultiMonitorWallpaperSwitcher.Taskbar
                 {
                     CommandAction = () =>
                     {
-                        DoubleClickTrayCommandEnum res = UserProfile.GetDoubleClickTray();
+                        DoubleClickTrayCommandEnum res = UserProfile.GetClickTray();
                         switch (res)
                         {
                             case DoubleClickTrayCommandEnum.SwitchWallpaper:
@@ -109,6 +109,33 @@ namespace MultiMonitorWallpaperSwitcher.Taskbar
                             case DoubleClickTrayCommandEnum.ShowWindow:
                             default:
                                 ShowWindowCommand.Execute(this);
+                                break;
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand DoubleCustomCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        DoubleClickTrayCommandEnum res = UserProfile.GetDoubleClickTray();
+                        switch (res)
+                        {
+                            case DoubleClickTrayCommandEnum.ShowWindow:
+                                ShowWindowCommand.Execute(this);
+                                break;
+                            case DoubleClickTrayCommandEnum.PauseAuto:
+                                ChangePauseState.Execute(this);
+                                break;
+                            case DoubleClickTrayCommandEnum.SwitchWallpaper:
+                            default:
+                                SwitchNextWallpaperSet.Execute(this);
                                 break;
                         }
                     }

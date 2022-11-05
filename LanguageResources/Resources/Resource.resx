@@ -333,4 +333,7 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>Open this folder</value>
   </data>
+  <data name="ClickTray" xml:space="preserve">
+    <value>Click the tray icon to do:</value>
+  </data>
 </root>

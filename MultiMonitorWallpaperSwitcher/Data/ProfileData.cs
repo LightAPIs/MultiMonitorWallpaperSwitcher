@@ -70,6 +70,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private bool pShowWindowAtStartup;
         private bool pAutoCheckAtStartup;
         private bool pRunAtSystemStart;
+        private DoubleClickTrayCommandEnum pClickTray;
         private DoubleClickTrayCommandEnum pDoubleClickTray;
         private DesktopBackgroundModeEnum pDesktopBackgroundMode;
         private uint pDesktopBackgroundColor;
@@ -108,6 +109,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
             pShowWindowAtStartup = UserProfile.GetShowWindowAtStartup();
             pAutoCheckAtStartup = UserProfile.GetAutoCheckAtStartup();
             pRunAtSystemStart = UserProfile.GetRunAtSystemStart();
+            pClickTray = UserProfile.GetClickTray();
             pDoubleClickTray = UserProfile.GetDoubleClickTray();
             pDesktopBackgroundMode = UserProfile.GetDesktopBackgroundMode();
             pDesktopBackgroundColor = UserProfile.GetDesktopBackgroundColor();
@@ -248,6 +250,24 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     {
                         regHandler.RemoveStartup();
                     }
+                }
+            }
+        }
+
+        public string ClickTray
+        {
+            get
+            {
+                return ((int)pClickTray).ToString();
+            }
+            set
+            {
+                DoubleClickTrayCommandEnum v = (DoubleClickTrayCommandEnum)(int.Parse(value));
+                if (pClickTray != v)
+                {
+                    pClickTray = v;
+                    UserProfile.SetClickTray(pClickTray);
+                    Notify(nameof(ClickTray));
                 }
             }
         }

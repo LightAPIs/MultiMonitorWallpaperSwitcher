@@ -142,6 +142,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Click the tray icon to do: 的本地化字符串。
+        /// </summary>
+        public static string ClickTray {
+            get {
+                return ResourceManager.GetString("ClickTray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Create Desktop Shortcut 的本地化字符串。
         /// </summary>
         public static string CreateDesktopShortcut {

@@ -25,8 +25,10 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             { "ShowWindowAtStartup", "True" },
             // 暂停自动切换功能
             { "PauseAutoSwitch", "False" },
-            // 双击托盘图片执行的命令
-            { "DoubleClickTray", "0" },
+            // 单击托盘图标执行的命令 - 默认打开主窗口
+            { "ClickTray", "0" },
+            // 双击托盘图标执行的命令 - 默认切换下一组壁纸
+            { "DoubleClickTray", "1" },
             // 桌面背景色 - 预设值
             { "DesktopBackgroundMode", "0" },
             // 桌面背景色 - 自定义
@@ -155,6 +157,16 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         public static bool SetPauseAutoSwitch(bool value)
         {
             return SetValue("PauseAutoSwitch", value.ToString());
+        }
+
+        /// <summary>
+        /// 设置单击托盘图标的操作命令
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool SetClickTray(DoubleClickTrayCommandEnum value)
+        {
+            return SetValue("ClickTray", ((int)value).ToString());
         }
 
         /// <summary>
@@ -297,12 +309,12 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         }
 
         /// <summary>
-        /// 获取双击托盘图标的操作命令
+        /// 获取单击托盘图标的操作命令
         /// </summary>
         /// <returns></returns>
-        public static DoubleClickTrayCommandEnum GetDoubleClickTray()
+        public static DoubleClickTrayCommandEnum GetClickTray()
         {
-            string value = GetValue("DoubleClickTray", "0");
+            string value = GetValue("ClickTray", "0");
             int.TryParse(value, out int index);
             if (Enum.IsDefined(typeof(DoubleClickTrayCommandEnum), index))
             {
@@ -311,6 +323,24 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             else
             {
                 return DoubleClickTrayCommandEnum.ShowWindow;
+            }
+        }
+
+        /// <summary>
+        /// 获取双击托盘图标的操作命令
+        /// </summary>
+        /// <returns></returns>
+        public static DoubleClickTrayCommandEnum GetDoubleClickTray()
+        {
+            string value = GetValue("DoubleClickTray", "1");
+            int.TryParse(value, out int index);
+            if (Enum.IsDefined(typeof(DoubleClickTrayCommandEnum), index))
+            {
+                return (DoubleClickTrayCommandEnum)index;
+            }
+            else
+            {
+                return DoubleClickTrayCommandEnum.SwitchWallpaper;
             }
         }
 

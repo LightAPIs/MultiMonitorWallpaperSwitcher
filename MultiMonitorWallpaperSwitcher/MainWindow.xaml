@@ -242,6 +242,10 @@
                                         <ComboBox ItemsSource="{StaticResource LanguageOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding LangId}" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Static lang:Resource.ClickTray}" VerticalAlignment="Center"/>
+                                        <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding ClickTray}" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{x:Static lang:Resource.DoubleClickTray}" VerticalAlignment="Center"/>
                                         <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickTray}" Margin="10,0,0,0"/>
                                     </StackPanel>
