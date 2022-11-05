@@ -9,6 +9,8 @@
         xmlns:uiconverter="clr-namespace:MultiMonitorWallpaperSwitcher.UIConverter"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:data="clr-namespace:MultiMonitorWallpaperSwitcher.Data"
+        xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+        xmlns:uibehavior="clr-namespace:MultiMonitorWallpaperSwitcher.UIBehavior"
         x:Class="MultiMonitorWallpaperSwitcher.MainWindow"
         mc:Ignorable="d"
         Title="Multi-Monitor Wallpaper Switcher" Height="450" Width="800"
@@ -122,6 +124,9 @@
                                                     <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfLastSettingImage}" Command="{Binding ShowLastRecordDir}"/>
                                                 </ContextMenu>
                                             </materialDesign:Card.ContextMenu>
+                                            <i:Interaction.Behaviors>
+                                                <uibehavior:MouseDoubleClickBehavior PathValue="{Binding WallpaperPath}"/>
+                                            </i:Interaction.Behaviors>
                                             <Image Source="{Binding Path=WallpaperPath, Converter={StaticResource StringToImageSourceConverter}}" Stretch="{Binding Path=DataContext.StretchMode, ElementName=WindowTabControl}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </materialDesign:Card>
                                     </DataTemplate>
@@ -183,6 +188,9 @@
                                                                     <MenuItem Header="{x:Static lang:Resource.SetWallpaperByFolder}" Command="{Binding SetWallpaperCommand}" CommandParameter="{Binding Path}"/>
                                                                 </ContextMenu>
                                                             </TextBlock.ContextMenu>
+                                                            <i:Interaction.Behaviors>
+                                                                <uibehavior:MouseDoubleClickBehavior PathValue="{Binding Path}"/>
+                                                            </i:Interaction.Behaviors>
                                                         </TextBlock>
                                                         <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                                                             <TextBlock Text="{Binding Path=Count, Converter={StaticResource CountToStringConverter}}"/>
@@ -388,16 +396,16 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Material Design In XAML Toolkit (MIT)"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/JamesNK/Newtonsoft.Json">
+                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/JamesNK/Newtonsoft.Json">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Json.NET (MIT)"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Material Design In XAML Toolkit (MIT)"/>
                                     </StackPanel>
                                 </Button>
                             </Grid>
@@ -406,7 +414,13 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://www.sqlite.org/copyright.html">
+                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/Microsoft/XamlBehaviorsWpf">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="XamlBehaviors for WPF (MIT)"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://www.sqlite.org/copyright.html">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Database"  VerticalAlignment="Center"/>
                                         <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="SQLite"/>

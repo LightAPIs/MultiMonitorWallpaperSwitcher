@@ -22,6 +22,10 @@ Multi-Monitor Wallpaper Switcher 是一个可以实现为多个显示器屏幕�
 
 该工具可以在 Windows8/8.1、Windows10 和 Windows11 系统上工作。
 
+## 预览
+
+<img src="Images/zh-CN.jpg" width="800" height="450" alt="preview"/>
+
 ## 运行需求
 
 - [.NET 6.0 桌面运行时](https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0/runtime)
@@ -30,18 +34,15 @@ Multi-Monitor Wallpaper Switcher 是一个可以实现为多个显示器屏幕�
 
 前往 [Releases](https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher/releases/latest) 下载程序压缩包 `zip` 文件并解压，运行 `MultiMonitorWallpaperSwitcher.exe` 程序即可。
 
-## 预览
-
-<img src="Images/zh-CN.jpg" width="800" height="450" alt="preview"/>
-
 ## 依赖
 
 该项目依赖以下开源项目提供的组件：
 
 - [FluentScheduler](https://github.com/fluentscheduler/FluentScheduler) ([BSD license](https://github.com/fluentscheduler/FluentScheduler/blob/version-5/LICENSE))
 - [Hardcodet NotifyIcon for WPF](https://github.com/hardcodet/wpf-notifyicon) ([CPOL-1.02 license](https://github.com/hardcodet/wpf-notifyicon/blob/develop/LICENSE))
-- [Material Design In XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) ([MIT license](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE))
 - [Json.NET](https://github.com/JamesNK/Newtonsoft.Json) ([MIT license](https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md))
+- [Material Design In XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) ([MIT license](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/LICENSE))
+- [XamlBehaviors for WPF](https://github.com/Microsoft/XamlBehaviorsWpf) ([MIT license](https://github.com/microsoft/XamlBehaviorsWpf/blob/master/LICENSE))
 - [SQLite](https://www.sqlite.org/copyright.html)
 
 ## License
