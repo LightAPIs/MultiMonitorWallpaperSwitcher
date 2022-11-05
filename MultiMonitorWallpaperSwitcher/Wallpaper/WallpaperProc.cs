@@ -16,7 +16,7 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
         /// <summary>
         /// 支持设置为壁纸的图片文件格式字典
         /// </summary>
-        private static readonly Dictionary<string, int> ExtDic = new Dictionary<string, int>()
+        public static readonly Dictionary<string, int> ExtDic = new Dictionary<string, int>()
         {
             { ".png", 1 },
             { ".jpg", 1 },
