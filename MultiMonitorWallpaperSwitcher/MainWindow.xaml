@@ -125,7 +125,7 @@
                                                 </ContextMenu>
                                             </materialDesign:Card.ContextMenu>
                                             <i:Interaction.Behaviors>
-                                                <uibehavior:MouseDoubleClickBehavior PathValue="{Binding WallpaperPath}"/>
+                                                <uibehavior:MouseDoubleClickBehavior DoubleClickCommand="{Binding DoubleClickCard}"/>
                                                 <uibehavior:ImageDropBehavior ID="{Binding DeviceId}" Time="{Binding IntervalTime}" Wallpaper="{Binding Mode=TwoWay, Path=WallpaperPath}"/>
                                             </i:Interaction.Behaviors>
                                             <Image Source="{Binding Path=WallpaperPath, Converter={StaticResource StringToImageSourceConverter}}" Stretch="{Binding Path=DataContext.StretchMode, ElementName=WindowTabControl}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -190,7 +190,7 @@
                                                                 </ContextMenu>
                                                             </TextBlock.ContextMenu>
                                                             <i:Interaction.Behaviors>
-                                                                <uibehavior:MouseDoubleClickBehavior PathValue="{Binding Path}"/>
+                                                                <uibehavior:MouseDoubleClickBehavior DoubleClickCommand="{Binding DoubleClickFolder}"/>
                                                             </i:Interaction.Behaviors>
                                                         </TextBlock>
                                                         <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -237,7 +237,15 @@
                                     <ListBox.Resources>
                                         <data:LanguageOptions x:Key="LanguageOptions"/>
                                         <data:DoubleClickTrayOptions x:Key="DoubleClickTrayOptions"/>
+                                        <data:DoubleClickCardOptions x:Key="DoubleClickCardOptions"/>
+                                        <data:DoubleClickFolderOptions x:Key="DoubleClickFolderOptions"/>
                                     </ListBox.Resources>
+                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding CreateShortcut}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Tag" VerticalAlignment="Center"/>
+                                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.CreateDesktopShortcut}"/>
+                                        </StackPanel>
+                                    </Button>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{x:Static lang:Resource.ProgramLanguage}" VerticalAlignment="Center"/>
                                         <ComboBox ItemsSource="{StaticResource LanguageOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding LangId}" Margin="10,0,0,0"/>
@@ -249,6 +257,14 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{x:Static lang:Resource.DoubleClickTray}" VerticalAlignment="Center"/>
                                         <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickTray}" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Static lang:Resource.DoubleClickCard}" VerticalAlignment="Center"/>
+                                        <ComboBox ItemsSource="{StaticResource DoubleClickCardOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickCard}" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Static lang:Resource.DoubleClickFolder}" VerticalAlignment="Center"/>
+                                        <ComboBox ItemsSource="{StaticResource DoubleClickFolderOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickFolder}" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <CheckBox IsChecked="{Binding ShowWindowAtStartup}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
@@ -266,12 +282,6 @@
                                         <CheckBox IsChecked="{Binding RunAtSystemStart}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.AutoRunProgram}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
-                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding CreateShortcut}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Tag" VerticalAlignment="Center"/>
-                                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.CreateDesktopShortcut}"/>
-                                        </StackPanel>
-                                    </Button>
                                 </ListBox>
                             </GroupBox>
                             <GroupBox Grid.Row="1" Header="{x:Static lang:Resource.WallpaperOptions}">

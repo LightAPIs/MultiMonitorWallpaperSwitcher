@@ -72,6 +72,8 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private bool pRunAtSystemStart;
         private DoubleClickTrayCommandEnum pClickTray;
         private DoubleClickTrayCommandEnum pDoubleClickTray;
+        private DoubleClickCardCommandEnum pDoubleClickCard;
+        private DoubleClickFolderCommandEnum pDoubleClickFolder;
         private DesktopBackgroundModeEnum pDesktopBackgroundMode;
         private uint pDesktopBackgroundColor;
         private bool pDisableQualityReduction;
@@ -111,6 +113,8 @@ namespace MultiMonitorWallpaperSwitcher.Data
             pRunAtSystemStart = UserProfile.GetRunAtSystemStart();
             pClickTray = UserProfile.GetClickTray();
             pDoubleClickTray = UserProfile.GetDoubleClickTray();
+            pDoubleClickCard = UserProfile.GetDoubleClickCard();
+            pDoubleClickFolder = UserProfile.GetDoubleClickFolder();
             pDesktopBackgroundMode = UserProfile.GetDesktopBackgroundMode();
             pDesktopBackgroundColor = UserProfile.GetDesktopBackgroundColor();
             pDisableQualityReduction = UserProfile.GetDisableQualityReduction();
@@ -286,6 +290,42 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     pDoubleClickTray = v;
                     UserProfile.SetDoubleClickTray(pDoubleClickTray);
                     Notify(nameof(DoubleClickTray));
+                }
+            }
+        }
+
+        public string DoubleClickCard
+        {
+            get
+            {
+                return ((int)pDoubleClickCard).ToString();
+            }
+            set
+            {
+                DoubleClickCardCommandEnum v = (DoubleClickCardCommandEnum)(int.Parse(value));
+                if (pDoubleClickCard != v)
+                {
+                    pDoubleClickCard = v;
+                    UserProfile.SetDoubleClickCard(pDoubleClickCard);
+                    Notify(nameof(DoubleClickCard));
+                }
+            }
+        }
+
+        public string DoubleClickFolder
+        {
+            get
+            {
+                return ((int)pDoubleClickFolder).ToString();
+            }
+            set
+            {
+                DoubleClickFolderCommandEnum v = (DoubleClickFolderCommandEnum)(int.Parse(value));
+                if (pDoubleClickFolder != v)
+                {
+                    pDoubleClickFolder = v;
+                    UserProfile.SetDoubleClickFolder(pDoubleClickFolder);
+                    Notify(nameof(DoubleClickFolder));
                 }
             }
         }

@@ -29,6 +29,10 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             { "ClickTray", "0" },
             // 双击托盘图标执行的命令 - 默认切换下一组壁纸
             { "DoubleClickTray", "1" },
+            // 双击显示器卡片执行的操作
+            { "DoubleClickCard", "0" },
+            // 双击文件夹执行的操作
+            { "DoubleClickFolder", "0" },
             // 桌面背景色 - 预设值
             { "DesktopBackgroundMode", "0" },
             // 桌面背景色 - 自定义
@@ -177,6 +181,26 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         public static bool SetDoubleClickTray(DoubleClickTrayCommandEnum value)
         {
             return SetValue("DoubleClickTray", ((int)value).ToString());
+        }
+
+        /// <summary>
+        /// 设置双击卡片的操作命令
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool SetDoubleClickCard(DoubleClickCardCommandEnum value)
+        {
+            return SetValue("DoubleClickCard", ((int)value).ToString());
+        }
+
+        /// <summary>
+        /// 设置双击文件夹的操作命令
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool SetDoubleClickFolder(DoubleClickFolderCommandEnum value)
+        {
+            return SetValue("DoubleClickFolder", ((int)value).ToString());
         }
 
         /// <summary>
@@ -345,6 +369,42 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         }
 
         /// <summary>
+        /// 获取双击卡片的操作命令
+        /// </summary>
+        /// <returns></returns>
+        public static DoubleClickCardCommandEnum GetDoubleClickCard()
+        {
+            string value = GetValue("DoubleClickCard", "0");
+            int.TryParse(value, out int index);
+            if (Enum.IsDefined(typeof(DoubleClickCardCommandEnum), index))
+            {
+                return (DoubleClickCardCommandEnum)index;
+            }
+            else
+            {
+                return DoubleClickCardCommandEnum.ViewCurrentImage;
+            }
+        }
+
+        /// <summary>
+        /// 获取双击文件夹的操作命令
+        /// </summary>
+        /// <returns></returns>
+        public static DoubleClickFolderCommandEnum GetDoubleClickFolder()
+        {
+            string value = GetValue("DoubleClickFolder", "0");
+            int.TryParse(value, out int index);
+            if (Enum.IsDefined(typeof(DoubleClickFolderCommandEnum), index))
+            {
+                return (DoubleClickFolderCommandEnum)index;
+            }
+            else
+            {
+                return DoubleClickFolderCommandEnum.OpenFolder;
+            }
+        }
+
+        /// <summary>
         /// 获取桌面背影色模式
         /// </summary>
         /// <returns></returns>
@@ -475,5 +535,24 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         Yellow = 8,
         Cyan = 9,
         Purple = 10,
+    }
+
+    public enum DoubleClickCardCommandEnum
+    {
+        ViewCurrentImage = 0,
+        SwitchNextWallpaper = 1,
+        SetSpecifiedImage = 2,
+        RefreshCurrentCard = 3,
+        ViewSettingImage = 4,
+        ViewLastSettingImage = 5,
+        OpenDirectoryOfCurrentImage = 6,
+        OpenDirectoryOfSettingImage = 7,
+        OpenDirectoryOfLastSettingImage = 8
+    }
+
+    public enum DoubleClickFolderCommandEnum
+    {
+        OpenFolder = 0,
+        SetWallpaperByFolder = 1
     }
 }

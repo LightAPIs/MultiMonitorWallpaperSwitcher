@@ -336,4 +336,10 @@
   <data name="ClickTray" xml:space="preserve">
     <value>Click the tray icon to do:</value>
   </data>
+  <data name="DoubleClickCard" xml:space="preserve">
+    <value>Double-click the monitor card to do:</value>
+  </data>
+  <data name="DoubleClickFolder" xml:space="preserve">
+    <value>Double-click the folder item to do:</value>
+  </data>
 </root>

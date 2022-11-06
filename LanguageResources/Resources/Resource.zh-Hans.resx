@@ -336,4 +336,10 @@
   <data name="ClickTray" xml:space="preserve">
     <value>单击托盘图标执行的操作:</value>
   </data>
+  <data name="DoubleClickCard" xml:space="preserve">
+    <value>双击显示器卡片执行的操作:</value>
+  </data>
+  <data name="DoubleClickFolder" xml:space="preserve">
+    <value>双击文件夹项目执行的操作:</value>
+  </data>
 </root>

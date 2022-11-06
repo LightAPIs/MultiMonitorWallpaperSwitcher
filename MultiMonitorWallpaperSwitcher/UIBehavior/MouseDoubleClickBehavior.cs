@@ -16,16 +16,16 @@ namespace MultiMonitorWallpaperSwitcher.UIBehavior
     {
         private uint count = 0;
 
-        public string PathValue
+        public ICommand DoubleClickCommand
         {
-            get { return (string)GetValue(PathValueProperty); }
+            get { return (ICommand)GetValue(DoubleClickCommandProperty); }
             set
             {
-                SetValue(PathValueProperty, value);
+                SetValue(DoubleClickCommandProperty, value);
             }
         }
 
-        public static readonly DependencyProperty PathValueProperty = DependencyProperty.Register("PathValue", typeof(string), typeof(MouseDoubleClickBehavior), new PropertyMetadata(null));
+        public static readonly DependencyProperty DoubleClickCommandProperty = DependencyProperty.Register("DoubleClickCommand", typeof(ICommand), typeof(MouseDoubleClickBehavior), new PropertyMetadata(null));
 
         protected override void OnAttached()
         {
@@ -50,23 +50,13 @@ namespace MultiMonitorWallpaperSwitcher.UIBehavior
             {
                 timer.IsEnabled = false;
                 count = 0;
-                OpenPathValue();
+                ExecuteCommand();
             }
         }
 
-        private void OpenPathValue()
+        private void ExecuteCommand()
         {
-            if (!string.IsNullOrEmpty(PathValue))
-            {
-                if (File.Exists(PathValue) || Directory.Exists(PathValue))
-                {
-                    try
-                    {
-                        Process.Start("explorer.exe", PathValue);
-                    }
-                    catch { }
-                }
-            }
+            DoubleClickCommand?.Execute(this);
         }
     }
 }

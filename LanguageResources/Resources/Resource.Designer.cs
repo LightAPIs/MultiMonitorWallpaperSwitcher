@@ -205,6 +205,24 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Double-click the monitor card to do: 的本地化字符串。
+        /// </summary>
+        public static string DoubleClickCard {
+            get {
+                return ResourceManager.GetString("DoubleClickCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Double-click the folder item to do: 的本地化字符串。
+        /// </summary>
+        public static string DoubleClickFolder {
+            get {
+                return ResourceManager.GetString("DoubleClickFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Double-click the tray icon to do: 的本地化字符串。
         /// </summary>
         public static string DoubleClickTray {

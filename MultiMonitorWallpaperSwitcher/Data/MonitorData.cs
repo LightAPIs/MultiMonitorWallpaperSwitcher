@@ -16,6 +16,7 @@ using MultiMonitorWallpaperSwitcher.Wallpaper;
 using MultiMonitorWallpaperSwitcher.CommandBase;
 using MultiMonitorWallpaperSwitcher.TaskScheduler;
 using LanguageResources;
+using MultiMonitorWallpaperSwitcher.Profile;
 
 namespace MultiMonitorWallpaperSwitcher.Data
 {
@@ -535,6 +536,51 @@ namespace MultiMonitorWallpaperSwitcher.Data
             }
         }
 
+        public ICommand DoubleClickCard
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        DoubleClickCardCommandEnum res = UserProfile.GetDoubleClickCard();
+                        switch (res)
+                        {
+                            case DoubleClickCardCommandEnum.SwitchNextWallpaper:
+                                SwitchNextWallpaper.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.SetSpecifiedImage:
+                                SetSpecifiedImage.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.RefreshCurrentCard:
+                                RefreshCardContent.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.ViewSettingImage:
+                                ShowCurrentRecordImage.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.ViewLastSettingImage:
+                                ShowLastRecordImage.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.OpenDirectoryOfCurrentImage:
+                                ShowCurrentWallpaperDir.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.OpenDirectoryOfSettingImage:
+                                ShowCurrentRecordDir.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.OpenDirectoryOfLastSettingImage:
+                                ShowLastRecordDir.Execute(this);
+                                break;
+                            case DoubleClickCardCommandEnum.ViewCurrentImage:
+                            default:
+                                ShowCurrentWallpaperImage.Execute(this);
+                                break;
+                        }
+                    }
+                };
+            }
+        }
+
         public void AddFolder()
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -742,6 +788,30 @@ namespace MultiMonitorWallpaperSwitcher.Data
                                 Process.Start("explorer.exe", fPath);
                             }
                             catch (Exception) { }
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand DoubleClickFolder
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        DoubleClickFolderCommandEnum res = UserProfile.GetDoubleClickFolder();
+                        switch (res)
+                        {
+                            case DoubleClickFolderCommandEnum.SetWallpaperByFolder:
+                                SetWallpaperCommand.Execute(fPath);
+                                break;
+                            case DoubleClickFolderCommandEnum.OpenFolder:
+                            default:
+                                OpenFolder.Execute(this);
+                                break;
                         }
                     }
                 };
