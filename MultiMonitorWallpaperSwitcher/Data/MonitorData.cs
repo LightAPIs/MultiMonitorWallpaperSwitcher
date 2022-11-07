@@ -672,7 +672,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
             {
                 try
                 {
-                    Process.Start("explorer.exe", filePath);
+                    Process.Start("explorer.exe", "\"" + filePath + "\"");
                 }
                 catch (Exception) { }
             }
@@ -689,7 +689,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     {
                         try
                         {
-                            Process.Start("explorer.exe", dir.FullName);
+                            Process.Start("explorer.exe", "\"" + dir.FullName + "\"");
                         }
                         catch (Exception) { }
                     }
@@ -785,7 +785,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                         {
                             try
                             {
-                                Process.Start("explorer.exe", fPath);
+                                Process.Start("explorer.exe", "\"" + fPath + "\"");
                             }
                             catch (Exception) { }
                         }
