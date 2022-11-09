@@ -132,7 +132,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     folders = mRow["folder_list"].ToString()!;
                 }
 
-                MonitorData md = new MonitorData(folders)
+                MonitorData md = new MonitorData(folders, intervalTime)
                 {
                     DeviceId = deviceId,
                     PelsWidth = mi.PelsWidth,
@@ -143,7 +143,6 @@ namespace MultiMonitorWallpaperSwitcher.Data
                     Y = y,
                     Width = width,
                     Height = height,
-                    IntervalTime = intervalTime,
                     WallpaperPath = wallpaperPath,
                 };
                 this.Add(md);
@@ -168,9 +167,10 @@ namespace MultiMonitorWallpaperSwitcher.Data
         public AddCommand AddFolderCommand { get; }
         public ObservableCollection<FolderData> Folders { get; }
 
-        public MonitorData(string folderList)
+        public MonitorData(string folderList, int iTime)
         {
             mFolderList = folderList;
+            mIntervalTime = iTime;
             AddFolderCommand = new AddCommand()
             {
                 AddHandler = AddFolder
