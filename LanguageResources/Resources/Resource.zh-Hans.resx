@@ -342,4 +342,10 @@
   <data name="DoubleClickFolder" xml:space="preserve">
     <value>双击文件夹项目执行的操作:</value>
   </data>
+  <data name="HotKey" xml:space="preserve">
+    <value>热键</value>
+  </data>
+  <data name="HotKeySettings" xml:space="preserve">
+    <value>热键设置</value>
+  </data>
 </root>

@@ -43,6 +43,7 @@
                 <uiconverter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
                 <uiconverter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
                 <uiconverter:CountToStringConverter x:Key="CountToStringConverter"/>
+                <uiconverter:BooleanToHotKeyIconConverter x:Key="BooleanToHotKeyIconConverter"/>
                 <Style x:Key="MonitorCard" TargetType="ListBoxItem">
                     <Setter Property="Canvas.Left" Value="{Binding X}"/>
                     <Setter Property="Canvas.Top" Value="{Binding Y}"/>
@@ -230,6 +231,7 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <GroupBox Grid.Row="0" Header="{x:Static lang:Resource.ProgramOptions}">
@@ -303,6 +305,30 @@
                                     <StackPanel Orientation="Horizontal">
                                         <CheckBox IsChecked="{Binding DisableQualityReduction}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.DisableQualityReduction}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </ListBox>
+                            </GroupBox>
+                            <GroupBox Grid.Row="2" Header="{x:Static lang:Resource.HotKeySettings}">
+                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Static lang:Resource.ShowWindow}" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="ShowWindowTextBox" VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HotKey}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=ShowWindowHotKey, Mode=OneWay}" IsEnabled="{Binding CanSetShowWindowHotKey}" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" uiconverter:HotKeyAttachedProperties.HotKey="True"/>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding SetShowWindowHotKey}" CommandParameter="{Binding ElementName=ShowWindowTextBox}">
+                                            <materialDesign:PackIcon Kind="{Binding Path=CanSetShowWindowHotKey, Converter={StaticResource BooleanToHotKeyIconConverter}}"/>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearShowWindowHotKey}" CommandParameter="{Binding ElementName=ShowWindowTextBox}">
+                                            <materialDesign:PackIcon Kind="DeleteForever"/>
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Static lang:Resource.SwitchNextWallpaper}" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="SwitchWallpaperTextBox" VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HotKey}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SwitchWallpaperHotKey, Mode=OneWay}" IsEnabled="{Binding CanSetSwitchWallpaperHotKey}" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" uiconverter:HotKeyAttachedProperties.HotKey="True"/>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding SetSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
+                                            <materialDesign:PackIcon Kind="{Binding Path=CanSetSwitchWallpaperHotKey, Converter={StaticResource BooleanToHotKeyIconConverter}}"/>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
+                                            <materialDesign:PackIcon Kind="DeleteForever"/>
+                                        </Button>
                                     </StackPanel>
                                 </ListBox>
                             </GroupBox>

@@ -331,6 +331,24 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Hotkey 的本地化字符串。
+        /// </summary>
+        public static string HotKey {
+            get {
+                return ResourceManager.GetString("HotKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Hotkey settings 的本地化字符串。
+        /// </summary>
+        public static string HotKeySettings {
+            get {
+                return ResourceManager.GetString("HotKeySettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Image 的本地化字符串。
         /// </summary>
         public static string Image {

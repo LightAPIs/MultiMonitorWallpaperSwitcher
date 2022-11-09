@@ -14,6 +14,7 @@ using MultiMonitorWallpaperSwitcher.TaskScheduler;
 using MultiMonitorWallpaperSwitcher.Wallpaper;
 using FluentScheduler;
 using System.Diagnostics;
+using MultiMonitorWallpaperSwitcher.KeyMgr;
 
 namespace MultiMonitorWallpaperSwitcher
 {
@@ -75,6 +76,21 @@ namespace MultiMonitorWallpaperSwitcher
                     }
                 }
                 TaskProc.SetNextTask();
+            }
+
+            //* 注册热键消息处理
+            Glob.NWin = new NWindow();
+
+            //* 注册热键
+            HotKey showHotKey = UserProfile.GetShowWindowHotKey();
+            if (showHotKey.GetKeys() != "None")
+            {
+                HotKeyManager.RegisterSystemHotKey(HotKeyManager.HotKeySet.ShowWindow, showHotKey, Glob.HWND);
+            }
+            HotKey switchHotKey = UserProfile.GetSwitchWallpaperHotKey();
+            if (switchHotKey.GetKeys() != "None")
+            {
+                HotKeyManager.RegisterSystemHotKey(HotKeyManager.HotKeySet.SwitchWallpaper, switchHotKey, Glob.HWND);
             }
 
             //* 启动时自动检查更新

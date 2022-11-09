@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using MultiMonitorWallpaperSwitcher.CommandBase;
 using MultiMonitorWallpaperSwitcher.Config;
+using MultiMonitorWallpaperSwitcher.KeyMgr;
 using MultiMonitorWallpaperSwitcher.Monitor;
 using MultiMonitorWallpaperSwitcher.Profile;
 using MultiMonitorWallpaperSwitcher.TaskScheduler;
@@ -151,38 +152,7 @@ namespace MultiMonitorWallpaperSwitcher.Taskbar
                 {
                     CommandAction = () =>
                     {
-                        bool isCheck = false;
-                        if (!Glob.AutoUpdateChecked && UserProfile.GetAutoCheckAtStartup())
-                        {
-                            isCheck = true;
-                            Glob.AutoUpdateChecked = true;
-                        }
-
-                        if (App.Current.MainWindow == null)
-                        {
-                            App.Current.MainWindow = new MainWindow(isCheck);
-                            App.Current.MainWindow.Show();
-                        }
-                        else
-                        {
-                            bool hadMain = false;
-                            foreach (Window win in App.Current.Windows)
-                            {
-                                if (win is MainWindow)
-                                {
-                                    hadMain = true;
-                                    win.Show();
-                                    win.WindowState = WindowState.Normal;
-                                    win.Activate();
-                                }
-                            }
-
-                            if (!hadMain)
-                            {
-                                App.Current.MainWindow = new MainWindow(isCheck);
-                                App.Current.MainWindow.Show();
-                            }
-                        }
+                        CommonMethods.ShowWindowMethod();
                     }
                 };
             }
@@ -229,6 +199,11 @@ namespace MultiMonitorWallpaperSwitcher.Taskbar
                     CommandAction = () =>
                     {
                         Glob.Conf.CloseDatabase();
+                        foreach (var item in HotKeyManager.HotKeyDic)
+                        {
+                            HotKeyManager.UnregisterSystemHotKey(item.Key, Glob.HWND);
+                        }
+                        Glob.NWin?.Dispose();
                         App.Current.Shutdown();
                     }
                 };

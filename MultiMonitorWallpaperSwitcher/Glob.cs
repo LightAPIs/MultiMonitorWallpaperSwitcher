@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using MultiMonitorWallpaperSwitcher.Config;
 using MultiMonitorWallpaperSwitcher.TaskScheduler;
-using System.IO;
+using MultiMonitorWallpaperSwitcher.KeyMgr;
 
 namespace MultiMonitorWallpaperSwitcher
 {
@@ -15,5 +12,7 @@ namespace MultiMonitorWallpaperSwitcher
         public static ConfigDB Conf = new ConfigDB("config");
         public static ExecutionTime ExcutionInfo = new ExecutionTime();
         public static bool AutoUpdateChecked = false;
+        public static IntPtr HWND;
+        public static NWindow? NWin;
     }
 }

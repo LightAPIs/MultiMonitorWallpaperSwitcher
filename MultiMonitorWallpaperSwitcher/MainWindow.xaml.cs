@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using MultiMonitorWallpaperSwitcher.CommandBase;
 using MultiMonitorWallpaperSwitcher.Data;
+using MultiMonitorWallpaperSwitcher.KeyMgr;
+using MultiMonitorWallpaperSwitcher.Profile;
 
 namespace MultiMonitorWallpaperSwitcher
 {
@@ -61,6 +62,19 @@ namespace MultiMonitorWallpaperSwitcher
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
+
+            if (profileData != null)
+            {   //? 处理在编辑热键时关闭窗口的情况
+                if (profileData.CanSetShowWindowHotKey && profileData.ShowWindowHotKey != "None")
+                {
+                    HotKeyManager.RegisterSystemHotKey(HotKeyManager.HotKeySet.ShowWindow, UserProfile.GetShowWindowHotKey(), Glob.HWND);
+                }
+                if (profileData.CanSetSwitchWallpaperHotKey && profileData.SwitchWallpaperHotKey != "None")
+                {
+                    HotKeyManager.RegisterSystemHotKey(HotKeyManager.HotKeySet.SwitchWallpaper, UserProfile.GetSwitchWallpaperHotKey(), Glob.HWND);
+                }
+            }
+
             WindowTabControl.DataContext = null;
             MonitorListBox.ItemsSource = null;
             profileData = null;

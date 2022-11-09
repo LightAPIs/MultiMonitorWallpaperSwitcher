@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiMonitorWallpaperSwitcher.KeyMgr;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,7 +45,11 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             // 开机自启动
             { "RunAtSystemStart", "False" },
             // 禁用桌面壁纸 JPEG 质量降低 - 仅 Windows 10 以上有效
-            { "DisableQualityReduction", "False" }
+            { "DisableQualityReduction", "False" },
+            // 显示主窗口热键
+            { "ShowWindowHotKey", "None" },
+            // 切换下一组壁纸热键
+            { "SwitchWallpaperHotKey", "None" }
         };
 
         /// <summary>
@@ -261,6 +266,26 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         public static bool SetDisableQualityReduction(bool value)
         {
             return SetValue("DisableQualityReduction", value.ToString());
+        }
+
+        /// <summary>
+        /// 设置显示主窗口热键
+        /// </summary>
+        /// <param name="hotKey"></param>
+        /// <returns></returns>
+        public static bool SetShowWindowHotKey(HotKey hotKey)
+        {
+            return SetValue("ShowWindowHotKey", hotKey.GetKeys());
+        }
+
+        /// <summary>
+        /// 设置切换下一组壁纸热键
+        /// </summary>
+        /// <param name="hotKey"></param>
+        /// <returns></returns>
+        public static bool SetSwitchWallpaperHotKey(HotKey hotKey)
+        {
+            return SetValue("SwitchWallpaperHotKey", hotKey.GetKeys());
         }
 
         /// <summary>
@@ -491,6 +516,28 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 获取显示主窗口热键
+        /// </summary>
+        /// <returns></returns>
+        public static HotKey GetShowWindowHotKey()
+        {
+            string value = GetValue("ShowWindowHotKey", "None");
+            HotKey hotKey = new HotKey(value);
+            return hotKey;
+        }
+
+        /// <summary>
+        /// 获取切换下一组壁纸热键
+        /// </summary>
+        /// <returns></returns>
+        public static HotKey GetSwitchWallpaperHotKey()
+        {
+            string value = GetValue("SwitchWallpaperHotKey", "None");
+            HotKey hotKey = new HotKey(value);
+            return hotKey;
         }
 
         private static XmlDocument CreateXMLDocument()

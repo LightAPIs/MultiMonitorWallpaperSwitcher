@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.IO;
+using System.Windows.Controls;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using LanguageResources;
 using MultiMonitorWallpaperSwitcher.CommandBase;
 using MultiMonitorWallpaperSwitcher.Profile;
 using MultiMonitorWallpaperSwitcher.Wallpaper;
 using MultiMonitorWallpaperSwitcher.Update;
 using MultiMonitorWallpaperSwitcher.RegistryMgr;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
+using MultiMonitorWallpaperSwitcher.KeyMgr;
 
 namespace MultiMonitorWallpaperSwitcher.Data
 {
@@ -77,6 +77,10 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private DesktopBackgroundModeEnum pDesktopBackgroundMode;
         private uint pDesktopBackgroundColor;
         private bool pDisableQualityReduction;
+        private HotKey pShowWindowHotKey;
+        private bool pCanSetShowWindowHotKey;
+        private HotKey pSwitchWallpaperHotKey;
+        private bool pCanSetSwitchWallpaperHotKey;
 
         /// <summary>
         /// 版本格式
@@ -118,6 +122,10 @@ namespace MultiMonitorWallpaperSwitcher.Data
             pDesktopBackgroundMode = UserProfile.GetDesktopBackgroundMode();
             pDesktopBackgroundColor = UserProfile.GetDesktopBackgroundColor();
             pDisableQualityReduction = UserProfile.GetDisableQualityReduction();
+            pShowWindowHotKey = UserProfile.GetShowWindowHotKey();
+            pCanSetShowWindowHotKey = false;
+            pSwitchWallpaperHotKey = UserProfile.GetSwitchWallpaperHotKey();
+            pCanSetSwitchWallpaperHotKey = false;
 
             if (autoCheckUpdate)
             {
@@ -439,6 +447,48 @@ namespace MultiMonitorWallpaperSwitcher.Data
             }
         }
 
+        public string ShowWindowHotKey
+        {
+            get
+            {
+                return pShowWindowHotKey.GetKeys();
+            }
+        }
+
+        public bool CanSetShowWindowHotKey
+        {
+            get { return pCanSetShowWindowHotKey; }
+            set
+            {
+                if (pCanSetShowWindowHotKey != value)
+                {
+                    pCanSetShowWindowHotKey = value;
+                    Notify(nameof(CanSetShowWindowHotKey));
+                }
+            }
+        }
+
+        public string SwitchWallpaperHotKey
+        {
+            get
+            {
+                return pSwitchWallpaperHotKey.GetKeys();
+            }
+        }
+
+        public bool CanSetSwitchWallpaperHotKey
+        {
+            get { return pCanSetSwitchWallpaperHotKey; }
+            set
+            {
+                if (pCanSetSwitchWallpaperHotKey != value)
+                {
+                    pCanSetSwitchWallpaperHotKey = value;
+                    Notify(nameof(CanSetSwitchWallpaperHotKey));
+                }
+            }
+        }
+
         /// <summary>
         /// 当前版本值
         /// </summary>
@@ -559,6 +609,126 @@ namespace MultiMonitorWallpaperSwitcher.Data
                                     IPersistFile file = (IPersistFile)link;
                                     file.Save(shortcutFile, false);
                                 }
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand SetShowWindowHotKey
+        {
+            get
+            {
+                return new ContextCommand
+                {
+                    CommandAction = paramater =>
+                    {
+                        if (paramater is TextBox textBox)
+                        {
+                            if (CanSetShowWindowHotKey)
+                            {
+                                CanSetShowWindowHotKey = false;
+                                string val = textBox.Text.Trim();
+                                if (val != pShowWindowHotKey.GetKeys())
+                                {
+                                    pShowWindowHotKey.SetKeys(val);
+                                    UserProfile.SetShowWindowHotKey(pShowWindowHotKey);
+                                }
+                                if (pShowWindowHotKey.GetKeys() != "None")
+                                {
+                                    HotKeyManager.RegisterSystemHotKey(HotKeyManager.HotKeySet.ShowWindow, pShowWindowHotKey, Glob.HWND);
+                                }
+                            }
+                            else
+                            {
+                                HotKeyManager.UnregisterSystemHotKey(HotKeyManager.HotKeySet.ShowWindow, Glob.HWND);
+                                CanSetShowWindowHotKey = true;
+                                textBox.Focus();
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand ClearShowWindowHotKey
+        {
+            get
+            {
+                return new ContextCommand
+                {
+                    CommandAction = paramater =>
+                    {
+                        if (paramater is TextBox textBox)
+                        {
+                            CanSetShowWindowHotKey = false;
+                            textBox.Text = "None";
+                            if (pShowWindowHotKey.GetKeys() != "None")
+                            {
+                                pShowWindowHotKey.SetKeys("None");
+                                UserProfile.SetShowWindowHotKey(pShowWindowHotKey);
+                                HotKeyManager.UnregisterSystemHotKey(HotKeyManager.HotKeySet.ShowWindow, Glob.HWND);
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand SetSwitchWallpaperHotKey
+        {
+            get
+            {
+                return new ContextCommand
+                {
+                    CommandAction = paramater =>
+                    {
+                        if (paramater is TextBox textBox)
+                        {
+                            if (CanSetSwitchWallpaperHotKey)
+                            {
+                                CanSetSwitchWallpaperHotKey = false;
+                                string val = textBox.Text.Trim();
+                                if (val != pSwitchWallpaperHotKey.GetKeys())
+                                {
+                                    pSwitchWallpaperHotKey.SetKeys(val);
+                                    UserProfile.SetSwitchWallpaperHotKey(pSwitchWallpaperHotKey);
+                                }
+                                if (pSwitchWallpaperHotKey.GetKeys() != "None")
+                                {
+                                    HotKeyManager.RegisterSystemHotKey(HotKeyManager.HotKeySet.SwitchWallpaper, pSwitchWallpaperHotKey, Glob.HWND);
+                                }
+                            }
+                            else
+                            {
+                                HotKeyManager.UnregisterSystemHotKey(HotKeyManager.HotKeySet.SwitchWallpaper, Glob.HWND);
+                                CanSetSwitchWallpaperHotKey = true;
+                                textBox.Focus();
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand ClearSwitchWallpaperHotKey
+        {
+            get
+            {
+                return new ContextCommand
+                {
+                    CommandAction = paramater =>
+                    {
+                        if (paramater is TextBox textBox)
+                        {
+                            CanSetSwitchWallpaperHotKey = false;
+                            textBox.Text = "None";
+                            if (pSwitchWallpaperHotKey.GetKeys() != "None")
+                            {
+                                pSwitchWallpaperHotKey.SetKeys("None");
+                                UserProfile.SetSwitchWallpaperHotKey(pSwitchWallpaperHotKey);
+                                HotKeyManager.UnregisterSystemHotKey(HotKeyManager.HotKeySet.SwitchWallpaper, Glob.HWND);
                             }
                         }
                     }

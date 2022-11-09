@@ -342,4 +342,10 @@
   <data name="DoubleClickFolder" xml:space="preserve">
     <value>Double-click the folder item to do:</value>
   </data>
+  <data name="HotKey" xml:space="preserve">
+    <value>Hotkey</value>
+  </data>
+  <data name="HotKeySettings" xml:space="preserve">
+    <value>Hotkey settings</value>
+  </data>
 </root>
