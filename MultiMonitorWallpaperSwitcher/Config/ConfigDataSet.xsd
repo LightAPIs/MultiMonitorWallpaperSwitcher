@@ -18,8 +18,20 @@
               <xs:element name="device_id" msprop:Generator_ColumnPropNameInTable="device_idColumn" msprop:Generator_ColumnPropNameInRow="device_id" msprop:Generator_UserColumnName="device_id" msprop:Generator_ColumnVarNameInTable="columndevice_id" type="xs:string" />
               <xs:element name="interval_time" msprop:Generator_ColumnPropNameInTable="interval_timeColumn" msprop:Generator_ColumnPropNameInRow="interval_time" msprop:Generator_UserColumnName="interval_time" msprop:Generator_ColumnVarNameInTable="columninterval_time" type="xs:int" default="0" minOccurs="0" />
               <xs:element name="folder_list" msprop:Generator_ColumnPropNameInTable="folder_listColumn" msprop:Generator_ColumnPropNameInRow="folder_list" msprop:Generator_UserColumnName="folder_list" msprop:Generator_ColumnVarNameInTable="columnfolder_list" type="xs:string" default="&quot;&quot;" minOccurs="0" />
-              <xs:element name="cur_path" msprop:Generator_ColumnPropNameInRow="cur_path" msprop:Generator_ColumnPropNameInTable="cur_pathColumn" msprop:Generator_ColumnVarNameInTable="columncur_path" msprop:Generator_UserColumnName="cur_path" type="xs:string" default="&quot;&quot;" minOccurs="0" />
-              <xs:element name="last_path" msprop:Generator_ColumnPropNameInRow="last_path" msprop:Generator_ColumnPropNameInTable="last_pathColumn" msprop:Generator_ColumnVarNameInTable="columnlast_path" msprop:Generator_UserColumnName="last_path" type="xs:string" default="&quot;&quot;" minOccurs="0" />
+              <xs:element name="cur_path" msprop:Generator_UserColumnName="cur_path" msprop:Generator_ColumnPropNameInTable="cur_pathColumn" msprop:Generator_ColumnPropNameInRow="cur_path" msprop:Generator_ColumnVarNameInTable="columncur_path" type="xs:string" default="&quot;&quot;" minOccurs="0" />
+              <xs:element name="last_path" msprop:Generator_UserColumnName="last_path" msprop:Generator_ColumnPropNameInTable="last_pathColumn" msprop:Generator_ColumnPropNameInRow="last_path" msprop:Generator_ColumnVarNameInTable="columnlast_path" type="xs:string" default="&quot;&quot;" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Wallpaper" msprop:Generator_RowEvHandlerName="WallpaperRowChangeEventHandler" msprop:Generator_RowDeletedName="WallpaperRowDeleted" msprop:Generator_RowDeletingName="WallpaperRowDeleting" msprop:Generator_RowEvArgName="WallpaperRowChangeEvent" msprop:Generator_TablePropName="Wallpaper" msprop:Generator_RowChangedName="WallpaperRowChanged" msprop:Generator_RowChangingName="WallpaperRowChanging" msprop:Generator_TableClassName="WallpaperDataTable" msprop:Generator_RowClassName="WallpaperRow" msprop:Generator_TableVarName="tableWallpaper" msprop:Generator_UserTableName="Wallpaper">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_UserColumnName="id" type="xs:long" />
+              <xs:element name="create_time" msprop:Generator_ColumnPropNameInRow="create_time" msprop:Generator_ColumnPropNameInTable="create_timeColumn" msprop:Generator_ColumnVarNameInTable="columncreate_time" msprop:Generator_UserColumnName="create_time" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="device_id" msprop:Generator_ColumnPropNameInRow="device_id" msprop:Generator_ColumnPropNameInTable="device_idColumn" msprop:Generator_ColumnVarNameInTable="columndevice_id" msprop:Generator_UserColumnName="device_id" type="xs:string" minOccurs="0" />
+              <xs:element name="path" msprop:Generator_ColumnPropNameInRow="path" msprop:Generator_ColumnPropNameInTable="pathColumn" msprop:Generator_ColumnVarNameInTable="columnpath" msprop:Generator_UserColumnName="path" type="xs:string" minOccurs="0" />
+              <xs:element name="all_count" msprop:Generator_ColumnPropNameInRow="all_count" msprop:Generator_ColumnPropNameInTable="all_countColumn" msprop:Generator_ColumnVarNameInTable="columnall_count" msprop:Generator_UserColumnName="all_count" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="random_index" msprop:Generator_ColumnPropNameInRow="random_index" msprop:Generator_ColumnPropNameInTable="random_indexColumn" msprop:Generator_ColumnVarNameInTable="columnrandom_index" msprop:Generator_UserColumnName="random_index" type="xs:int" default="-1" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -28,6 +40,10 @@
     <xs:unique name="MonitorKey1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Monitor" />
       <xs:field xpath="mstns:device_id" />
+    </xs:unique>
+    <xs:unique name="WallpaperKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Wallpaper" />
+      <xs:field xpath="mstns:id" />
     </xs:unique>
   </xs:element>
 </xs:schema>

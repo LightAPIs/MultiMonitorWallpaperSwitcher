@@ -142,6 +142,15 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Clear logging 的本地化字符串。
+        /// </summary>
+        public static string ClearLogging {
+            get {
+                return ResourceManager.GetString("ClearLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Click the tray icon to do: 的本地化字符串。
         /// </summary>
         public static string ClickTray {
@@ -232,11 +241,38 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Enable logging for wallpaper settings 的本地化字符串。
+        /// </summary>
+        public static string EnableLogging {
+            get {
+                return ResourceManager.GetString("EnableLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Exit 的本地化字符串。
         /// </summary>
         public static string ExitProgram {
             get {
                 return ResourceManager.GetString("ExitProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export logging 的本地化字符串。
+        /// </summary>
+        public static string ExportLogging {
+            get {
+                return ResourceManager.GetString("ExportLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Export logging to text document 的本地化字符串。
+        /// </summary>
+        public static string ExportLoggingToFile {
+            get {
+                return ResourceManager.GetString("ExportLoggingToFile", resourceCulture);
             }
         }
         
@@ -376,6 +412,24 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Logging 的本地化字符串。
+        /// </summary>
+        public static string Logging {
+            get {
+                return ResourceManager.GetString("Logging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Logging count: 的本地化字符串。
+        /// </summary>
+        public static string LoggingCount {
+            get {
+                return ResourceManager.GetString("LoggingCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 min 的本地化字符串。
         /// </summary>
         public static string Minutes {
@@ -489,6 +543,15 @@ namespace LanguageResources {
         public static string RefreshCurrentCard {
             get {
                 return ResourceManager.GetString("RefreshCurrentCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Refresh logging count 的本地化字符串。
+        /// </summary>
+        public static string RefreshLoggingCount {
+            get {
+                return ResourceManager.GetString("RefreshLoggingCount", resourceCulture);
             }
         }
         
@@ -660,6 +723,15 @@ namespace LanguageResources {
         public static string TabSettings {
             get {
                 return ResourceManager.GetString("TabSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Text documents 的本地化字符串。
+        /// </summary>
+        public static string TextDocuments {
+            get {
+                return ResourceManager.GetString("TextDocuments", resourceCulture);
             }
         }
         

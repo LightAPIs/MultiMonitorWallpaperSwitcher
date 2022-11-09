@@ -45,15 +45,22 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
         /// 为显示器设定指定图片为壁纸
         /// - 方法内部已自动更新数据库
         /// </summary>
-        /// <param name="deviceId"></param>
-        /// <param name="path"></param>
-        public static void SetWallpaper(string deviceId, string path)
+        /// <param name="deviceId">设备 ID</param>
+        /// <param name="path">图片路径</param>
+        /// <param name="count">随机总数</param>
+        /// <param name="index">随机索引</param>
+        public static void SetWallpaper(string deviceId, string path, int count = 0, int index = -1)
         {
             if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
                 var wallpaper = (IDesktopWallpaper)(new DesktopWallpaperClass());
                 wallpaper.SetWallpaper(deviceId, path);
                 Glob.Conf.UpdateMonitorWallpaperPath(deviceId, path);
+                if (UserProfile.GetEnableLogging())
+                {
+                    DateTime now = DateTime.Now;
+                    Glob.Conf.InsertWallpaper(now.ToString("s"), deviceId, path, count, index);
+                }
             }
         }
 
@@ -66,12 +73,12 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
         public static string SetWallpaperByFolder(string deviceId, string folder)
         {
             List<string> list = new List<string>() { folder };
-            string imageFile = GetRandomImageFromPathList(list);
-            SetWallpaper(deviceId, imageFile);
-            return imageFile;
+            var imageFile = GetRandomImageFromPathList(list);
+            SetWallpaper(deviceId, imageFile.Value, imageFile.Count, imageFile.Index);
+            return imageFile.Value;
         }
 
-        private static string GetRandomImageFromPathList(List<string> dirs)
+        private static RandomStruct<string> GetRandomImageFromPathList(List<string> dirs)
         {
             List<string> files = GetImageFilesFromPathList(dirs);
             if (files.Count > 0)
@@ -80,7 +87,12 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
             }
             else
             {
-                return string.Empty;
+                return new RandomStruct<string>()
+                {
+                    Value = string.Empty,
+                    Count = 0,
+                    Index = -1
+                };
             }
         }
 
@@ -213,9 +225,9 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
                     useList.Add(path);
                 }
             }
-            string imageFile = GetRandomImageFromPathList(useList);
-            SetWallpaper(deviceId, imageFile);
-            return imageFile;
+            var imageFile = GetRandomImageFromPathList(useList);
+            SetWallpaper(deviceId, imageFile.Value, imageFile.Count, imageFile.Index);
+            return imageFile.Value;
         }
 
         /// <summary>
@@ -314,10 +326,22 @@ namespace MultiMonitorWallpaperSwitcher.Wallpaper
     public static class Extensions
     {
         private static Random rnd = new Random();
-        public static T PickRandom<T>(this IList<T> source)
+        public static RandomStruct<T> PickRandom<T>(this IList<T> source)
         {
             int randIndex = rnd.Next(source.Count);
-            return source[randIndex];
+            return new RandomStruct<T>
+            {
+                Value = source[randIndex],
+                Count = source.Count,
+                Index = randIndex
+            };
         }
+    }
+
+    public struct RandomStruct<T>
+    {
+        public T Value;
+        public int Count;
+        public int Index;
     }
 }

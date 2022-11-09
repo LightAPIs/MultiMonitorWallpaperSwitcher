@@ -17,8 +17,12 @@ namespace MultiMonitorWallpaperSwitcher.Config
         {
             cmd.CommandText = "CREATE TABLE IF NOT EXISTS monitor(device_id TEXT PRIMARY KEY NOT NULL, interval_time INT DEFAULT 0, folder_list TEXT DEFAULT '', cur_path TEXT DEFAULT '', last_path TEXT DEFAULT '');";
             cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "CREATE TABLE IF NOT EXISTS wallpaper(id INTEGER PRIMARY KEY AUTOINCREMENT, create_time DATETIME, device_id TEXT, path TEXT, all_count INT DEFAULT 0, random_index INT DEFAULT -1);";
+            cmd.ExecuteNonQuery();
         }
 
+        #region Monitor
         public void SetMonitor(string device_id, int interval_time, string folder_list, string cur_path = "", string last_path = "")
         {
             string deviceId = ConvertText(device_id);
@@ -90,5 +94,54 @@ namespace MultiMonitorWallpaperSwitcher.Config
             cmd.CommandText = $"UPDATE monitor SET cur_path='{ConvertText(wallpaperPath)}', last_path='{ConvertText(lastPath)}' WHERE device_id='{ConvertText(device_id)}';";
             cmd.ExecuteNonQuery();
         }
+        #endregion
+
+        #region Wallpaper
+        public void InsertWallpaper(string create_time, string device_id, string path, int all_count = 0, int random_index = -1)
+        {
+            cmd.CommandText = $"INSERT INTO wallpaper VALUES(NULL, '{create_time}', '{ConvertText(device_id)}', '{ConvertText(path)}', {all_count}, {random_index});";
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 获取所有记录
+        /// </summary>
+        /// <returns></returns>
+        public ConfigDataSet.WallpaperDataTable GetAllWallpaper()
+        {
+            cmd.CommandText = "SELECT * FROM wallpaper";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            ConfigDataSet.WallpaperDataTable wallpaperRows = new ConfigDataSet.WallpaperDataTable();
+            adapter.Fill(wallpaperRows);
+            return wallpaperRows;
+        }
+
+        /// <summary>
+        /// 获取记录总数
+        /// </summary>
+        /// <returns></returns>
+        public long GetWallpaperCount()
+        {
+            cmd.CommandText = "SELECT COUNT(1) FROM wallpaper;";
+            object readValue = cmd.ExecuteScalar();
+            if (readValue == null )
+            {
+                return 0;
+            }
+            return Convert.ToInt64(readValue);
+        }
+
+        /// <summary>
+        /// 删除所有记录
+        /// </summary>
+        public void DeleteAllWallpaper()
+        {
+            cmd.CommandText = "DELETE FROM wallpaper;";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "DELETE FROM sqlite_sequence WHERE name='wallpaper';";
+            cmd.ExecuteNonQuery();
+            CleanDisk();
+        }
+        #endregion
     }
 }

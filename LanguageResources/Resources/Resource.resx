@@ -348,4 +348,28 @@
   <data name="HotKeySettings" xml:space="preserve">
     <value>Hotkey settings</value>
   </data>
+  <data name="TextDocuments" xml:space="preserve">
+    <value>Text documents</value>
+  </data>
+  <data name="ExportLoggingToFile" xml:space="preserve">
+    <value>Export logging to text document</value>
+  </data>
+  <data name="Logging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="EnableLogging" xml:space="preserve">
+    <value>Enable logging for wallpaper settings</value>
+  </data>
+  <data name="LoggingCount" xml:space="preserve">
+    <value>Logging count:</value>
+  </data>
+  <data name="RefreshLoggingCount" xml:space="preserve">
+    <value>Refresh logging count</value>
+  </data>
+  <data name="ClearLogging" xml:space="preserve">
+    <value>Clear logging</value>
+  </data>
+  <data name="ExportLogging" xml:space="preserve">
+    <value>Export logging</value>
+  </data>
 </root>

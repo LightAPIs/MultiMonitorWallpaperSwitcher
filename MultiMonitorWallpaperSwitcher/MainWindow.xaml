@@ -44,6 +44,7 @@
                 <uiconverter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
                 <uiconverter:CountToStringConverter x:Key="CountToStringConverter"/>
                 <uiconverter:BooleanToHotKeyIconConverter x:Key="BooleanToHotKeyIconConverter"/>
+                <uiconverter:LongToStringConverter x:Key="LongToStringConverter"/>
                 <Style x:Key="MonitorCard" TargetType="ListBoxItem">
                     <Setter Property="Canvas.Left" Value="{Binding X}"/>
                     <Setter Property="Canvas.Top" Value="{Binding Y}"/>
@@ -232,6 +233,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <GroupBox Grid.Row="0" Header="{x:Static lang:Resource.ProgramOptions}">
@@ -328,6 +330,27 @@
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
                                             <materialDesign:PackIcon Kind="DeleteForever"/>
+                                        </Button>
+                                    </StackPanel>
+                                </ListBox>
+                            </GroupBox>
+                            <GroupBox Grid.Row="3" Header="{x:Static lang:Resource.Logging}">
+                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding EnableLogging}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <TextBlock Text="{x:Static lang:Resource.EnableLogging}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Static lang:Resource.LoggingCount}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Path=LoggingCount, Converter={StaticResource LongToStringConverter}}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="20,0,0,0"  Command="{Binding RefreshLoggingCount}" ToolTip="{x:Static lang:Resource.RefreshLoggingCount}">
+                                            <materialDesign:PackIcon Kind="DatabaseRefresh"/>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding ClearLogging}" ToolTip="{x:Static lang:Resource.ClearLogging}">
+                                            <materialDesign:PackIcon Kind="DatabaseRemove"/>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding ExportLogging}" ToolTip="{x:Static lang:Resource.ExportLogging}">
+                                            <materialDesign:PackIcon Kind="DatabaseExport"/>
                                         </Button>
                                     </StackPanel>
                                 </ListBox>

@@ -18,6 +18,7 @@ using MultiMonitorWallpaperSwitcher.Wallpaper;
 using MultiMonitorWallpaperSwitcher.Update;
 using MultiMonitorWallpaperSwitcher.RegistryMgr;
 using MultiMonitorWallpaperSwitcher.KeyMgr;
+using Microsoft.Win32;
 
 namespace MultiMonitorWallpaperSwitcher.Data
 {
@@ -81,6 +82,8 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private bool pCanSetShowWindowHotKey;
         private HotKey pSwitchWallpaperHotKey;
         private bool pCanSetSwitchWallpaperHotKey;
+        private bool pEnableLogging;
+        private long pLoggingCount;
 
         /// <summary>
         /// 版本格式
@@ -126,6 +129,8 @@ namespace MultiMonitorWallpaperSwitcher.Data
             pCanSetShowWindowHotKey = false;
             pSwitchWallpaperHotKey = UserProfile.GetSwitchWallpaperHotKey();
             pCanSetSwitchWallpaperHotKey = false;
+            pEnableLogging = UserProfile.GetEnableLogging();
+            pLoggingCount = Glob.Conf.GetWallpaperCount();
 
             if (autoCheckUpdate)
             {
@@ -489,6 +494,33 @@ namespace MultiMonitorWallpaperSwitcher.Data
             }
         }
 
+        public bool EnableLogging
+        {
+            get { return pEnableLogging; }
+            set
+            {
+                if (pEnableLogging != value)
+                {
+                    pEnableLogging = value;
+                    UserProfile.SetEnableLogging(pEnableLogging);
+                    Notify(nameof(EnableLogging));
+                }
+            }
+        }
+
+        public long LoggingCount
+        {
+            get { return pLoggingCount; }
+            set
+            {
+                if (pLoggingCount != value)
+                {
+                    pLoggingCount = value;
+                    Notify(nameof(LoggingCount));
+                }
+            }
+        }
+
         /// <summary>
         /// 当前版本值
         /// </summary>
@@ -780,6 +812,82 @@ namespace MultiMonitorWallpaperSwitcher.Data
                                 uCheck.HasUpdated += HasUpdated;
                                 Task task = Task.Run(() => { uCheck.UpdateChecking(); });
                             }
+                        }
+                    }
+                };
+            }
+        }
+
+        public ICommand RefreshLoggingCount
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        LoggingCount = Glob.Conf.GetWallpaperCount();
+                    }
+                };
+            }
+        }
+
+        public ICommand ClearLogging
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        Glob.Conf.DeleteAllWallpaper();
+                        LoggingCount = 0;
+                    }
+                };
+            }
+        }
+
+        public ICommand ExportLogging
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CommandAction = () =>
+                    {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog()
+                        {
+                            Filter = Resource.TextDocuments + " (*.txt)|*.txt",
+                            Title = Resource.ExportLoggingToFile,
+                            AddExtension = true,
+                            DefaultExt = ".txt",
+                            FileName = "MMWS_log",
+                        };
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            string outputFile = saveFileDialog.FileName;
+                            try
+                            {
+                                if (File.Exists(outputFile))
+                                {
+                                    File.Delete(outputFile);
+                                }
+
+                                StringBuilder sb = new StringBuilder();
+                                var rows = Glob.Conf.GetAllWallpaper();
+                                foreach ( var row in rows )
+                                {
+                                    int colNum = rows.Columns.Count;
+                                    for (int i = 0; i < colNum; i++)
+                                    {
+                                        sb.Append(rows.Columns[i].ColumnName + "=");
+                                        sb.Append(row[i].ToString()!.Trim());
+                                        sb.Append(i == colNum - 1 ? "\r\n" : "\t");
+                                    }
+                                }
+                                File.WriteAllText(outputFile, sb.ToString());
+                            }
+                            catch (Exception) { }
                         }
                     }
                 };

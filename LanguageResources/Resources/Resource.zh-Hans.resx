@@ -348,4 +348,28 @@
   <data name="HotKeySettings" xml:space="preserve">
     <value>热键设置</value>
   </data>
+  <data name="TextDocuments" xml:space="preserve">
+    <value>文本文档</value>
+  </data>
+  <data name="ExportLoggingToFile" xml:space="preserve">
+    <value>导出日志记录至文本文档</value>
+  </data>
+  <data name="Logging" xml:space="preserve">
+    <value>日志记录</value>
+  </data>
+  <data name="EnableLogging" xml:space="preserve">
+    <value>启用壁纸设置的日志记录</value>
+  </data>
+  <data name="LoggingCount" xml:space="preserve">
+    <value>日志记录数量:</value>
+  </data>
+  <data name="RefreshLoggingCount" xml:space="preserve">
+    <value>刷新日志记录数量</value>
+  </data>
+  <data name="ClearLogging" xml:space="preserve">
+    <value>清理日志记录</value>
+  </data>
+  <data name="ExportLogging" xml:space="preserve">
+    <value>导出日志记录</value>
+  </data>
 </root>

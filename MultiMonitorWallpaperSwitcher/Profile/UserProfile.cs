@@ -49,7 +49,9 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             // 显示主窗口热键
             { "ShowWindowHotKey", "None" },
             // 切换下一组壁纸热键
-            { "SwitchWallpaperHotKey", "None" }
+            { "SwitchWallpaperHotKey", "None" },
+            // 是否启用日志记录
+            { "EnableLogging", "False" }
         };
 
         /// <summary>
@@ -286,6 +288,16 @@ namespace MultiMonitorWallpaperSwitcher.Profile
         public static bool SetSwitchWallpaperHotKey(HotKey hotKey)
         {
             return SetValue("SwitchWallpaperHotKey", hotKey.GetKeys());
+        }
+
+        /// <summary>
+        /// 设置是否启用日志记录
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool SetEnableLogging(bool value)
+        {
+            return SetValue("EnableLogging", value.ToString());
         }
 
         /// <summary>
@@ -538,6 +550,23 @@ namespace MultiMonitorWallpaperSwitcher.Profile
             string value = GetValue("SwitchWallpaperHotKey", "None");
             HotKey hotKey = new HotKey(value);
             return hotKey;
+        }
+
+        /// <summary>
+        /// 获取是否启用日志记录
+        /// </summary>
+        /// <returns></returns>
+        public static bool GetEnableLogging()
+        {
+            string value = GetValue("EnableLogging", "False");
+            try
+            {
+                return Convert.ToBoolean(value);
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         private static XmlDocument CreateXMLDocument()
