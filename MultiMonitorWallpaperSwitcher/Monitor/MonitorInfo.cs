@@ -119,9 +119,14 @@ namespace MultiMonitorWallpaperSwitcher.Monitor
         void SetSlideshow(IntPtr items);
         IntPtr GetSlideshow();
 
-        void SetSlideshowOptions(DesktopSlideshowDirection options, uint slideshowTick);
+        /// <summary>
+        /// 幻灯片放映设置
+        /// </summary>
+        /// <param name="options">置 0 禁用随机</param>
+        /// <param name="slideshowTick">图像转换之间的时间量(以 ms 为单位)</param>
+        void SetSlideshowOptions(DesktopSlideshowOptions options, uint slideshowTick);
         [PreserveSig]
-        uint GetSlideshowOptions(out DesktopSlideshowDirection options, out uint slideshowTick);
+        uint GetSlideshowOptions(out DesktopSlideshowOptions options, out uint slideshowTick);
 
         void AdvanceSlideshow([MarshalAs(UnmanagedType.LPWStr)] string monitorID, [MarshalAs(UnmanagedType.I4)] DesktopSlideshowDirection direction);
 
