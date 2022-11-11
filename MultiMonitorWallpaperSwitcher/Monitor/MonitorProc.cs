@@ -15,9 +15,13 @@ namespace MultiMonitorWallpaperSwitcher.Monitor
             var wallpaper = (IDesktopWallpaper)(new DesktopWallpaperClass());
             for (uint i = 0; i < wallpaper.GetMonitorDevicePathCount(); i++)
             {
-                var monitorId = wallpaper.GetMonitorDevicePathAt(i);
-                var rect = wallpaper.GetMonitorRECT(monitorId);
-                list.Add(new MonitorItem(monitorId, rect));
+                try
+                {
+                    var monitorId = wallpaper.GetMonitorDevicePathAt(i);
+                    var rect = wallpaper.GetMonitorRECT(monitorId);
+                    list.Add(new MonitorItem(monitorId, rect));
+                }
+                catch { }
             }
             return list;
         }
