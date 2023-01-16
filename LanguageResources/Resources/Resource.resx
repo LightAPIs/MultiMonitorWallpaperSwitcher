@@ -372,4 +372,13 @@
   <data name="ExportLogging" xml:space="preserve">
     <value>Export logging</value>
   </data>
+  <data name="FileLocation" xml:space="preserve">
+    <value>Imgae</value>
+  </data>
+  <data name="Filesize" xml:space="preserve">
+    <value>Filesize</value>
+  </data>
+  <data name="ImageSize" xml:space="preserve">
+    <value>Image size</value>
+  </data>
 </root>

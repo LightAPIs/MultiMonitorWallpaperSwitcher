@@ -10,12 +10,13 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using LanguageResources;
 using MultiMonitorWallpaperSwitcher.Config;
 using MultiMonitorWallpaperSwitcher.Monitor;
 using MultiMonitorWallpaperSwitcher.Wallpaper;
 using MultiMonitorWallpaperSwitcher.CommandBase;
 using MultiMonitorWallpaperSwitcher.TaskScheduler;
-using LanguageResources;
 using MultiMonitorWallpaperSwitcher.Profile;
 
 namespace MultiMonitorWallpaperSwitcher.Data
@@ -164,6 +165,10 @@ namespace MultiMonitorWallpaperSwitcher.Data
         private int mIntervalTime;
         private string mFolderList = string.Empty;
         private string mWallpaperPath = string.Empty;
+        private string mWallpaperInfo = string.Empty;
+        private long mFileLength = 0;
+        private ImageInfo mImageInfo = new();
+        private static readonly string[] units = new string[] { "B", "KB", "MB", "GB", "TB", "PB" };
         public AddCommand AddFolderCommand { get; }
         public ObservableCollection<FolderData> Folders { get; }
 
@@ -333,6 +338,10 @@ namespace MultiMonitorWallpaperSwitcher.Data
                 if (mWallpaperPath != value)
                 {
                     mWallpaperPath = value;
+                    //* 读取文件信息
+                    mFileLength = GetFileLength(value);
+                    mImageInfo = GetImageInfo(value);
+                    WallpaperInfo = $"{Resource.FileLocation}: {mWallpaperPath}\n{Resource.Filesize}: {SizeConvert(mFileLength)}\n{Resource.ImageSize}: {mImageInfo.Width:F0}x{mImageInfo.Height:F0}";
                     Notify(nameof(WallpaperPath));
                 }
             }
@@ -343,6 +352,19 @@ namespace MultiMonitorWallpaperSwitcher.Data
             get
             {
                 return $"{mPelsWidth}x{mPelsHeight} ({mPositionX},{mPositionY})";
+            }
+        }
+
+        public string WallpaperInfo
+        {
+            get { return mWallpaperInfo; }
+            set
+            {
+                if (mWallpaperInfo != value)
+                {
+                    mWallpaperInfo = value;
+                    Notify(nameof(WallpaperInfo));
+                }
             }
         }
 
@@ -697,6 +719,54 @@ namespace MultiMonitorWallpaperSwitcher.Data
             }
         }
 
+        private long GetFileLength(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                try
+                {
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    return fileInfo.Length;
+                }
+                catch { }
+            }
+            return 0;
+        }
+
+        private ImageInfo GetImageInfo(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                try
+                {
+                    var decoder = BitmapDecoder.Create(new Uri(filePath), BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnDemand);
+                    var frame = decoder.Frames[0];
+                    ImageInfo info = new()
+                    {
+                        Width = frame.PixelWidth,
+                        Height = frame.PixelHeight,
+                    };
+                    return info;
+                }
+                catch { }
+            }
+            return new ImageInfo();
+        }
+
+        private string SizeConvert(long bytes)
+        {
+            double cur = bytes;
+            foreach (string unit in units)
+            {
+                if (cur / 1024.0 < 1)
+                {
+                    return cur.ToString("F2") + unit;
+                }
+                cur /= 1024.0;
+            }
+            return bytes.ToString() + units[0];
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void Notify(string propertyName)
@@ -868,5 +938,11 @@ namespace MultiMonitorWallpaperSwitcher.Data
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+
+    internal class ImageInfo
+    {
+        public double Width { get; set; }
+        public double Height { get; set; }
     }
 }

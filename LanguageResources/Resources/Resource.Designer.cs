@@ -286,6 +286,24 @@ namespace LanguageResources {
         }
         
         /// <summary>
+        ///   查找类似 Imgae 的本地化字符串。
+        /// </summary>
+        public static string FileLocation {
+            get {
+                return ResourceManager.GetString("FileLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Filesize 的本地化字符串。
+        /// </summary>
+        public static string Filesize {
+            get {
+                return ResourceManager.GetString("Filesize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Fill 的本地化字符串。
         /// </summary>
         public static string Fill {
@@ -390,6 +408,15 @@ namespace LanguageResources {
         public static string Image {
             get {
                 return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Image size 的本地化字符串。
+        /// </summary>
+        public static string ImageSize {
+            get {
+                return ResourceManager.GetString("ImageSize", resourceCulture);
             }
         }
         

@@ -109,7 +109,7 @@
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <materialDesign:Card Width="{Binding Width}" Height="{Binding Height}" ToolTip="{Binding WallpaperPath}" Cursor="Hand" UniformCornerRadius="1" Background="{Binding Path=DataContext.DesktopBackgroundColor, ElementName=WindowTabControl, Converter={StaticResource ColorToBrushConverter}}" ClipToBounds="True" AllowDrop="True">
+                                        <materialDesign:Card Width="{Binding Width}" Height="{Binding Height}" ToolTip="{Binding WallpaperInfo}" Cursor="Hand" UniformCornerRadius="1" Background="{Binding Path=DataContext.DesktopBackgroundColor, ElementName=WindowTabControl, Converter={StaticResource ColorToBrushConverter}}" ClipToBounds="True" AllowDrop="True">
                                             <materialDesign:Card.ContextMenu>
                                                 <ContextMenu FontFamily="Microsoft YaHei">
                                                     <MenuItem Header="{x:Static lang:Resource.SwitchNextWallpaper}" Command="{Binding SwitchNextWallpaper}"/>
