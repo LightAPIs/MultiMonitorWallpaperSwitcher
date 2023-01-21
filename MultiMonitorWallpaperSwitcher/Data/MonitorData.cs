@@ -739,7 +739,7 @@ namespace MultiMonitorWallpaperSwitcher.Data
             {
                 try
                 {
-                    var decoder = BitmapDecoder.Create(new Uri(filePath), BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnDemand);
+                    var decoder = BitmapDecoder.Create(new Uri(filePath), BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnLoad);
                     var frame = decoder.Frames[0];
                     ImageInfo info = new()
                     {
