@@ -735,22 +735,21 @@ namespace MultiMonitorWallpaperSwitcher.Data
 
         private ImageInfo GetImageInfo(string filePath)
         {
+            ImageInfo info = new();
             if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
                 try
                 {
-                    var decoder = BitmapDecoder.Create(new Uri(filePath), BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnLoad);
-                    var frame = decoder.Frames[0];
-                    ImageInfo info = new()
-                    {
-                        Width = frame.PixelWidth,
-                        Height = frame.PixelHeight,
-                    };
-                    return info;
+                    using (Stream ms = new MemoryStream(File.ReadAllBytes(filePath))) {
+                        var decoder = BitmapDecoder.Create(ms, BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnLoad);
+                        var frame = decoder.Frames[0];
+                        info.Width = frame.PixelWidth;
+                        info.Height = frame.PixelHeight;
+                    }
                 }
                 catch { }
             }
-            return new ImageInfo();
+            return info;
         }
 
         private string SizeConvert(long bytes)
