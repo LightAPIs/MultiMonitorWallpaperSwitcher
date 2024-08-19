@@ -271,19 +271,19 @@
                                         <ComboBox ItemsSource="{StaticResource DoubleClickFolderOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickFolder}" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding ShowWindowAtStartup}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <ToggleButton IsChecked="{Binding ShowWindowAtStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.ShowWindowAtStartup}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding SwitchOnStartup}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <ToggleButton IsChecked="{Binding SwitchOnStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.SwitchWallpaperOnStartup}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding AutoCheckAtStartup}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <ToggleButton IsChecked="{Binding AutoCheckAtStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.AutoCheckUpdate}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding RunAtSystemStart}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <ToggleButton IsChecked="{Binding RunAtSystemStart}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.AutoRunProgram}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
                                 </ListBox>
@@ -305,7 +305,7 @@
                                         <Rectangle Margin="10,0,0,0" Fill="{Binding Path=DesktopBackgroundColor, Converter={StaticResource ColorToBrushConverter}}" Width="40" Height="40" RadiusX="25" RadiusY="25"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding DisableQualityReduction}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <ToggleButton IsChecked="{Binding DisableQualityReduction}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.DisableQualityReduction}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
                                 </ListBox>
@@ -337,7 +337,7 @@
                             <GroupBox Grid.Row="3" Header="{x:Static lang:Resource.Logging}">
                                 <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding EnableLogging}" Style="{StaticResource MaterialDesignActionDarkCheckBox}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                        <ToggleButton IsChecked="{Binding EnableLogging}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
                                         <TextBlock Text="{x:Static lang:Resource.EnableLogging}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
