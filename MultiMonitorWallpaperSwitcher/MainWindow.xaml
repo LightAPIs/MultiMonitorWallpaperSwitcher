@@ -88,10 +88,10 @@
                             <DockPanel>
                                 <TextBlock Text="{x:Static lang:Resource.GroupBoxPreviewHeader}" Foreground="White"/>
                                 <StackPanel x:Name="MonitorButtonSet" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button Width="15" Height="15" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.RefreshAllCards}" Margin="15 0" Command="{Binding RefreshCards}">
+                                    <Button Width="22" Height="22" Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.RefreshAllCards}" Margin="0 -10 25 -10" Command="{Binding RefreshCards}">
                                         <materialDesign:PackIcon Kind="Autorenew" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
                                     </Button>
-                                    <Button Width="15" Height="15" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.SwitchWallpaperSet}" Command="{Binding SwitchNextWallpapers}">
+                                    <Button Width="22" Height="22" Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.SwitchWallpaperSet}" Margin="0 -10 10 -10" Command="{Binding SwitchNextWallpapers}">
                                         <materialDesign:PackIcon Kind="SkipNext" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
                                     </Button>
                                 </StackPanel>
