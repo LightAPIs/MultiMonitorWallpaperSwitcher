@@ -30,134 +30,129 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <materialDesign:Card>
-            <materialDesign:Card.Resources>
-                <system:Double x:Key="IconSize">14</system:Double>
-                <system:Double x:Key="ButtonSize">18</system:Double>
-                <system:Double x:Key="SquareButtonWidth">36</system:Double>
-                <system:Double x:Key="SquareButtonHeight">18</system:Double>
-                <uiconverter:ProfileConverter x:Key="ProfileConverter"/>
-                <uiconverter:IntToStringConverter x:Key="IntToStringConverter"/>
-                <uiconverter:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
-                <uiconverter:BackgroundModeConverter x:Key="BackgroundModeConverter"/>
-                <uiconverter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
-                <uiconverter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-                <uiconverter:CountToStringConverter x:Key="CountToStringConverter"/>
-                <uiconverter:BooleanToHotKeyIconConverter x:Key="BooleanToHotKeyIconConverter"/>
-                <uiconverter:LongToStringConverter x:Key="LongToStringConverter"/>
-                <Style x:Key="MonitorCard" TargetType="ListBoxItem">
-                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem" >
-                                <Border x:Name="MonitorBorder" Padding="0" Margin="0" SnapsToDevicePixels="true" Style="{DynamicResource borderContent}">
-                                    <ContentPresenter/>
-                                </Border>
-                                <ControlTemplate.Resources>
-                                    <Style x:Key="borderContent" TargetType="Border">
-                                        <Setter Property="BorderThickness" Value="2"/>
-                                        <Setter Property="CornerRadius" Value="1"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                    </Style>
-                                </ControlTemplate.Resources>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="true">
-                                        <Setter TargetName="MonitorBorder" Property="BorderBrush" Value="Red"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </materialDesign:Card.Resources>
-            <TabControl x:Name="WindowTabControl" VerticalContentAlignment="Bottom" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Monitor" />
-                            <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Resource.TabMonitor}" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="3*"/>
-                        </Grid.RowDefinitions>
-                        <GroupBox
-                            x:Name="MonitorGroupBox"
-                            Style="{StaticResource MaterialDesignCardGroupBox}"
-                            Grid.Row="0">
-                            <GroupBox.Header>
-                                <DockPanel>
-                                    <TextBlock Text="{x:Static lang:Resource.GroupBoxPreviewHeader}" Foreground="White"/>
-                                    <StackPanel x:Name="MonitorButtonSet" Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <Button Width="15" Height="15" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.RefreshAllCards}" Margin="15 0" Command="{Binding RefreshCards}">
-                                            <materialDesign:PackIcon Kind="Autorenew" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
-                                        </Button>
-                                        <Button Width="15" Height="15" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.SwitchWallpaperSet}" Command="{Binding SwitchNextWallpapers}">
-                                            <materialDesign:PackIcon Kind="SkipNext" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DockPanel>
-                            </GroupBox.Header>
-                            <ListBox x:Name="MonitorListBox" ItemContainerStyle="{StaticResource MonitorCard}">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <Canvas/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <materialDesign:Card Width="{Binding Width}" Height="{Binding Height}" ToolTip="{Binding WallpaperInfo}" Cursor="Hand" UniformCornerRadius="1" Background="{Binding Path=DataContext.DesktopBackgroundColor, ElementName=WindowTabControl, Converter={StaticResource ColorToBrushConverter}}" ClipToBounds="True" AllowDrop="True">
-                                            <materialDesign:Card.ContextMenu>
-                                                <ContextMenu FontFamily="Microsoft YaHei">
-                                                    <MenuItem Header="{x:Static lang:Resource.SwitchNextWallpaper}" Command="{Binding SwitchNextWallpaper}"/>
-                                                    <MenuItem Header="{x:Static lang:Resource.SetSpecifiedImage}" Command="{Binding SetSpecifiedImage}"/>
-                                                    <MenuItem Header="{x:Static lang:Resource.RefreshCurrentCard}" Command="{Binding RefreshCardContent}"/>
-                                                    <Separator/>
-                                                    <MenuItem Header="{x:Static lang:Resource.ViewCurrentImage}" Command="{Binding ShowCurrentWallpaperImage}"/>
-                                                    <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfCurrentImage}" Command="{Binding ShowCurrentWallpaperDir}"/>
-                                                    <Separator/>
-                                                    <MenuItem Header="{x:Static lang:Resource.ViewSettingImage}" Command="{Binding ShowCurrentRecordImage}"/>
-                                                    <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfSettingImage}" Command="{Binding ShowCurrentRecordDir}"/>
-                                                    <Separator/>
-                                                    <MenuItem Header="{x:Static lang:Resource.ViewLastSettingImage}" Command="{Binding ShowLastRecordImage}"/>
-                                                    <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfLastSettingImage}" Command="{Binding ShowLastRecordDir}"/>
-                                                </ContextMenu>
-                                            </materialDesign:Card.ContextMenu>
-                                            <i:Interaction.Behaviors>
-                                                <uibehavior:MouseDoubleClickBehavior DoubleClickCommand="{Binding DoubleClickCard}"/>
-                                                <uibehavior:ImageDropBehavior ID="{Binding DeviceId}" Time="{Binding IntervalTime}" Wallpaper="{Binding Mode=TwoWay, Path=WallpaperPath}"/>
-                                            </i:Interaction.Behaviors>
-                                            <Image Source="{Binding Path=WallpaperPath, Converter={StaticResource StringToImageSourceConverter}}" Stretch="{Binding Path=DataContext.StretchMode, ElementName=WindowTabControl}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </materialDesign:Card>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </GroupBox>
-                        <GroupBox
+        <Grid.Resources>
+            <system:Double x:Key="IconSize">14</system:Double>
+            <system:Double x:Key="ButtonSize">18</system:Double>
+            <system:Double x:Key="SquareButtonWidth">36</system:Double>
+            <system:Double x:Key="SquareButtonHeight">18</system:Double>
+            <uiconverter:ProfileConverter x:Key="ProfileConverter"/>
+            <uiconverter:IntToStringConverter x:Key="IntToStringConverter"/>
+            <uiconverter:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
+            <uiconverter:BackgroundModeConverter x:Key="BackgroundModeConverter"/>
+            <uiconverter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+            <uiconverter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <uiconverter:CountToStringConverter x:Key="CountToStringConverter"/>
+            <uiconverter:BooleanToHotKeyIconConverter x:Key="BooleanToHotKeyIconConverter"/>
+            <uiconverter:LongToStringConverter x:Key="LongToStringConverter"/>
+            <Style x:Key="MonitorCard" TargetType="ListBoxItem">
+                <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem" >
+                            <Border x:Name="MonitorBorder" Padding="0" Margin="0" SnapsToDevicePixels="true" Style="{DynamicResource borderContent}">
+                                <ContentPresenter/>
+                            </Border>
+                            <ControlTemplate.Resources>
+                                <Style x:Key="borderContent" TargetType="Border">
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="CornerRadius" Value="1"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                </Style>
+                            </ControlTemplate.Resources>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter TargetName="MonitorBorder" Property="BorderBrush" Value="Red"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <TabControl x:Name="WindowTabControl" VerticalContentAlignment="Bottom" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Monitor" />
+                        <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Resource.TabMonitor}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox x:Name="MonitorGroupBox" Grid.Row="0">
+                        <GroupBox.Header>
+                            <DockPanel>
+                                <TextBlock Text="{x:Static lang:Resource.GroupBoxPreviewHeader}" Foreground="White"/>
+                                <StackPanel x:Name="MonitorButtonSet" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Width="15" Height="15" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.RefreshAllCards}" Margin="15 0" Command="{Binding RefreshCards}">
+                                        <materialDesign:PackIcon Kind="Autorenew" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
+                                    </Button>
+                                    <Button Width="15" Height="15" Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand" Padding="0" ToolTip="{x:Static lang:Resource.SwitchWallpaperSet}" Command="{Binding SwitchNextWallpapers}">
+                                        <materialDesign:PackIcon Kind="SkipNext" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DockPanel>
+                        </GroupBox.Header>
+                        <ListBox x:Name="MonitorListBox" ItemContainerStyle="{StaticResource MonitorCard}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <materialDesign:Card Width="{Binding Width}" Height="{Binding Height}" ToolTip="{Binding WallpaperInfo}" Cursor="Hand" UniformCornerRadius="1" Background="{Binding Path=DataContext.DesktopBackgroundColor, ElementName=WindowTabControl, Converter={StaticResource ColorToBrushConverter}}" ClipToBounds="True" AllowDrop="True">
+                                        <materialDesign:Card.ContextMenu>
+                                            <ContextMenu FontFamily="Microsoft YaHei">
+                                                <MenuItem Header="{x:Static lang:Resource.SwitchNextWallpaper}" Command="{Binding SwitchNextWallpaper}"/>
+                                                <MenuItem Header="{x:Static lang:Resource.SetSpecifiedImage}" Command="{Binding SetSpecifiedImage}"/>
+                                                <MenuItem Header="{x:Static lang:Resource.RefreshCurrentCard}" Command="{Binding RefreshCardContent}"/>
+                                                <Separator/>
+                                                <MenuItem Header="{x:Static lang:Resource.ViewCurrentImage}" Command="{Binding ShowCurrentWallpaperImage}"/>
+                                                <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfCurrentImage}" Command="{Binding ShowCurrentWallpaperDir}"/>
+                                                <Separator/>
+                                                <MenuItem Header="{x:Static lang:Resource.ViewSettingImage}" Command="{Binding ShowCurrentRecordImage}"/>
+                                                <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfSettingImage}" Command="{Binding ShowCurrentRecordDir}"/>
+                                                <Separator/>
+                                                <MenuItem Header="{x:Static lang:Resource.ViewLastSettingImage}" Command="{Binding ShowLastRecordImage}"/>
+                                                <MenuItem Header="{x:Static lang:Resource.OpenDirectoryOfLastSettingImage}" Command="{Binding ShowLastRecordDir}"/>
+                                            </ContextMenu>
+                                        </materialDesign:Card.ContextMenu>
+                                        <i:Interaction.Behaviors>
+                                            <uibehavior:MouseDoubleClickBehavior DoubleClickCommand="{Binding DoubleClickCard}"/>
+                                            <uibehavior:ImageDropBehavior ID="{Binding DeviceId}" Time="{Binding IntervalTime}" Wallpaper="{Binding Mode=TwoWay, Path=WallpaperPath}"/>
+                                        </i:Interaction.Behaviors>
+                                        <Image Source="{Binding Path=WallpaperPath, Converter={StaticResource StringToImageSourceConverter}}" Stretch="{Binding Path=DataContext.StretchMode, ElementName=WindowTabControl}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </materialDesign:Card>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                    <GroupBox
                             Header="{x:Static lang:Resource.GroupBoxHeaderMonitorOptions}"
-                            Style="{StaticResource MaterialDesignCardGroupBox}"
                             Grid.Row="1">
-                            <ScrollViewer x:Name="MonitorScrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="MonitorScrollViewer_PreviewMouseWheel">
-                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" HorizontalContentAlignment="Stretch" Visibility="{Binding ElementName=MonitorListBox, Path=SelectedIndex, Converter={StaticResource ProfileConverter}}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="{x:Static lang:Resource.Resolution}"/>
-                                            <TextBlock Margin="5 0 0 0" Text="{Binding ElementName=MonitorListBox, Path=SelectedItem.ResolutionText}"/>
-                                        </StackPanel>
-                                        <TextBox Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" uiconverter:IntervalAttachedProperties.IsOnlyNumber="True" uiconverter:EnterAttachedProperties.EnterPress="True"  materialDesign:HintAssist.Hint="{x:Static lang:Resource.AutoSwitchInterval}" materialDesign:TextFieldAssist.SuffixText="{x:Static lang:Resource.Minutes}" Text="{Binding Path=SelectedItem.IntervalTime, ElementName=MonitorListBox, Converter={StaticResource IntToStringConverter}}"/>
-                                    </Grid>
-                                    <GroupBox>
-                                        <GroupBox.Header>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Foreground="White" Text="{x:Static lang:Resource.FolderList}"/>
-                                                <Button
+                        <ScrollViewer x:Name="MonitorScrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="MonitorScrollViewer_PreviewMouseWheel">
+                            <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" HorizontalContentAlignment="Stretch" Visibility="{Binding ElementName=MonitorListBox, Path=SelectedIndex, Converter={StaticResource ProfileConverter}}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Static lang:Resource.Resolution}"/>
+                                        <TextBlock Margin="5 0 0 0" Text="{Binding ElementName=MonitorListBox, Path=SelectedItem.ResolutionText}"/>
+                                    </StackPanel>
+                                    <TextBox Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" uiconverter:IntervalAttachedProperties.IsOnlyNumber="True" uiconverter:EnterAttachedProperties.EnterPress="True"  materialDesign:HintAssist.Hint="{x:Static lang:Resource.AutoSwitchInterval}" materialDesign:TextFieldAssist.SuffixText="{x:Static lang:Resource.Minutes}" Text="{Binding Path=SelectedItem.IntervalTime, ElementName=MonitorListBox, Converter={StaticResource IntToStringConverter}}"/>
+                                </Grid>
+                                <GroupBox>
+                                    <GroupBox.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="White" Text="{x:Static lang:Resource.FolderList}"/>
+                                            <Button
                                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                                     HorizontalAlignment="Right"
                                                     Cursor="Hand"
@@ -167,37 +162,37 @@
                                                     Margin="15 0 0 0"
                                                     ToolTip="{x:Static lang:Resource.AddFolder}"
                                                     Command="{Binding ElementName=MonitorListBox, Path=SelectedItem.AddFolderCommand}">
-                                                    <materialDesign:PackIcon 
+                                                <materialDesign:PackIcon 
                                                             Kind="Plus"
                                                             Height="{StaticResource IconSize}"
                                                             Width="{StaticResource IconSize}"/>
-                                                </Button>
-                                            </StackPanel>
-                                        </GroupBox.Header>
-                                        <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding SelectedItem.Folders, ElementName=MonitorListBox}">
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <CheckBox Grid.Column="0" IsChecked="{Binding Enabled}" HorizontalAlignment="Left" Command="{Binding CheckCommand}" CommandParameter="{Binding Path}"/>
-                                                        <TextBlock Grid.Column="1" Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 5 0">
-                                                            <TextBlock.ContextMenu>
-                                                                <ContextMenu FontFamily="Microsoft YaHei">
-                                                                    <MenuItem Header="{x:Static lang:Resource.OpenFolder}" Command="{Binding OpenFolder}"/>
-                                                                    <MenuItem Header="{x:Static lang:Resource.SetWallpaperByFolder}" Command="{Binding SetWallpaperCommand}" CommandParameter="{Binding Path}"/>
-                                                                </ContextMenu>
-                                                            </TextBlock.ContextMenu>
+                                            </Button>
+                                        </StackPanel>
+                                    </GroupBox.Header>
+                                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding SelectedItem.Folders, ElementName=MonitorListBox}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <CheckBox Grid.Column="0" IsChecked="{Binding Enabled}" HorizontalAlignment="Left" Command="{Binding CheckCommand}" CommandParameter="{Binding Path}"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Path}" ToolTip="{Binding Path}" Margin="5 0 5 0">
+                                                        <TextBlock.ContextMenu>
+                                                            <ContextMenu FontFamily="Microsoft YaHei">
+                                                                <MenuItem Header="{x:Static lang:Resource.OpenFolder}" Command="{Binding OpenFolder}"/>
+                                                                <MenuItem Header="{x:Static lang:Resource.SetWallpaperByFolder}" Command="{Binding SetWallpaperCommand}" CommandParameter="{Binding Path}"/>
+                                                            </ContextMenu>
+                                                        </TextBlock.ContextMenu>
                                                             <i:Interaction.Behaviors>
                                                                 <uibehavior:MouseDoubleClickBehavior DoubleClickCommand="{Binding DoubleClickFolder}"/>
                                                             </i:Interaction.Behaviors>
-                                                        </TextBlock>
-                                                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <TextBlock Text="{Binding Path=Count, Converter={StaticResource CountToStringConverter}}"/>
-                                                            <Button
+                                                    </TextBlock>
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                                        <TextBlock Text="{Binding Path=Count, Converter={StaticResource CountToStringConverter}}"/>
+                                                        <Button
                                                                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
                                                                 Cursor="Hand"
                                                                 Width="{StaticResource ButtonSize}"
@@ -208,293 +203,292 @@
                                                                 CommandParameter="{Binding Path}"
                                                                 Margin="5,0,0,0"
                                                                 HorizontalAlignment="Right">
-                                                                <materialDesign:PackIcon Kind="Delete" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ListBox.ItemTemplate>
-                                        </ListBox>
-                                    </GroupBox>
-                                </ListBox>
-                            </ScrollViewer>
-                        </GroupBox>
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="CogOutline" />
-                            <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Resource.TabSettings}" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <ScrollViewer x:Name="ProfileScrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ProfileScrollViewer_PreviewMouseWheel">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <GroupBox Grid.Row="0" Header="{x:Static lang:Resource.ProgramOptions}">
-                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
-                                    <ListBox.Resources>
-                                        <data:LanguageOptions x:Key="LanguageOptions"/>
-                                        <data:DoubleClickTrayOptions x:Key="DoubleClickTrayOptions"/>
-                                        <data:DoubleClickCardOptions x:Key="DoubleClickCardOptions"/>
-                                        <data:DoubleClickFolderOptions x:Key="DoubleClickFolderOptions"/>
-                                    </ListBox.Resources>
-                                    <Button Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding CreateShortcut}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Tag" VerticalAlignment="Center"/>
-                                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.CreateDesktopShortcut}"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.ProgramLanguage}" VerticalAlignment="Center"/>
-                                        <ComboBox ItemsSource="{StaticResource LanguageOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding LangId}" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.ClickTray}" VerticalAlignment="Center"/>
-                                        <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding ClickTray}" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.DoubleClickTray}" VerticalAlignment="Center"/>
-                                        <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickTray}" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.DoubleClickCard}" VerticalAlignment="Center"/>
-                                        <ComboBox ItemsSource="{StaticResource DoubleClickCardOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickCard}" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.DoubleClickFolder}" VerticalAlignment="Center"/>
-                                        <ComboBox ItemsSource="{StaticResource DoubleClickFolderOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickFolder}" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton IsChecked="{Binding ShowWindowAtStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
-                                        <TextBlock Text="{x:Static lang:Resource.ShowWindowAtStartup}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton IsChecked="{Binding SwitchOnStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
-                                        <TextBlock Text="{x:Static lang:Resource.SwitchWallpaperOnStartup}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton IsChecked="{Binding AutoCheckAtStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
-                                        <TextBlock Text="{x:Static lang:Resource.AutoCheckUpdate}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton IsChecked="{Binding RunAtSystemStart}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
-                                        <TextBlock Text="{x:Static lang:Resource.AutoRunProgram}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                </ListBox>
-                            </GroupBox>
-                            <GroupBox Grid.Row="1" Header="{x:Static lang:Resource.WallpaperOptions}">
-                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
-                                    <ListBox.Resources>
-                                        <data:WallpaperPositionOptions x:Key="WallpaperPositionOptions"/>
-                                        <data:BackgroundColorOptions x:Key="BackgroundColorOptions"/>
-                                    </ListBox.Resources>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.WallpaperPosition}" VerticalAlignment="Center"/>
-                                        <ComboBox ItemsSource="{StaticResource WallpaperPositionOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding WallpaperPosition}" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.DesktopBackgroundColor}" VerticalAlignment="Center"/>
-                                        <ComboBox x:Name="BackgroundColorModeComboBox" ItemsSource="{StaticResource BackgroundColorOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DesktopBackgroundMode}" Margin="10,0,0,0"/>
-                                        <TextBox VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:TextFieldAssist.PrefixText="#" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HEX}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding DesktopBackgroundColor}" IsEnabled="{Binding Path=DesktopBackgroundMode, Converter={StaticResource BackgroundModeConverter}}" uiconverter:HexStringAttachedProperties.IsHexString="True" uiconverter:EnterAttachedProperties.EnterPress="True" MaxLength="6" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
-                                        <Rectangle Margin="10,0,0,0" Fill="{Binding Path=DesktopBackgroundColor, Converter={StaticResource ColorToBrushConverter}}" Width="40" Height="40" RadiusX="25" RadiusY="25"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton IsChecked="{Binding DisableQualityReduction}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
-                                        <TextBlock Text="{x:Static lang:Resource.DisableQualityReduction}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                </ListBox>
-                            </GroupBox>
-                            <GroupBox Grid.Row="2" Header="{x:Static lang:Resource.HotKeySettings}">
-                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.ShowWindow}" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="ShowWindowTextBox" VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HotKey}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=ShowWindowHotKey, Mode=OneWay}" IsEnabled="{Binding CanSetShowWindowHotKey}" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" uiconverter:HotKeyAttachedProperties.HotKey="True"/>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding SetShowWindowHotKey}" CommandParameter="{Binding ElementName=ShowWindowTextBox}">
-                                            <materialDesign:PackIcon Kind="{Binding Path=CanSetShowWindowHotKey, Converter={StaticResource BooleanToHotKeyIconConverter}}"/>
-                                        </Button>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearShowWindowHotKey}" CommandParameter="{Binding ElementName=ShowWindowTextBox}">
-                                            <materialDesign:PackIcon Kind="DeleteForever"/>
-                                        </Button>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.SwitchNextWallpaper}" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="SwitchWallpaperTextBox" VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HotKey}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SwitchWallpaperHotKey, Mode=OneWay}" IsEnabled="{Binding CanSetSwitchWallpaperHotKey}" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" uiconverter:HotKeyAttachedProperties.HotKey="True"/>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding SetSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
-                                            <materialDesign:PackIcon Kind="{Binding Path=CanSetSwitchWallpaperHotKey, Converter={StaticResource BooleanToHotKeyIconConverter}}"/>
-                                        </Button>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
-                                            <materialDesign:PackIcon Kind="DeleteForever"/>
-                                        </Button>
-                                    </StackPanel>
-                                </ListBox>
-                            </GroupBox>
-                            <GroupBox Grid.Row="3" Header="{x:Static lang:Resource.Logging}">
-                                <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton IsChecked="{Binding EnableLogging}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
-                                        <TextBlock Text="{x:Static lang:Resource.EnableLogging}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Static lang:Resource.LoggingCount}" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Path=LoggingCount, Converter={StaticResource LongToStringConverter}}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="20,0,0,0"  Command="{Binding RefreshLoggingCount}" ToolTip="{x:Static lang:Resource.RefreshLoggingCount}">
-                                            <materialDesign:PackIcon Kind="DatabaseRefresh"/>
-                                        </Button>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding ClearLogging}" ToolTip="{x:Static lang:Resource.ClearLogging}">
-                                            <materialDesign:PackIcon Kind="DatabaseRemove"/>
-                                        </Button>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding ExportLogging}" ToolTip="{x:Static lang:Resource.ExportLogging}">
-                                            <materialDesign:PackIcon Kind="DatabaseExport"/>
-                                        </Button>
-                                    </StackPanel>
-                                </ListBox>
-                            </GroupBox>
-                        </Grid>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <Canvas Width="24" Height="24">
-                                <Ellipse Canvas.Left="24" Canvas.Top="-6" Width="8" Height="8" Fill="Red" Visibility="{Binding Path=IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="InformationOutline"/>
-                            </Canvas>
-                            <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Resource.TabAbout}" />
-                        </StackPanel>
-                    </TabItem.Header>
+                                                            <materialDesign:PackIcon Kind="Delete" Height="{StaticResource IconSize}" Width="{StaticResource IconSize}"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </GroupBox>
+                            </ListBox>
+                        </ScrollViewer>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="CogOutline" />
+                        <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Resource.TabSettings}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="ProfileScrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ProfileScrollViewer_PreviewMouseWheel">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Row="0" Header="{x:Static lang:Resource.ProgramOptions}">
+                            <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
+                                <ListBox.Resources>
+                                    <data:LanguageOptions x:Key="LanguageOptions"/>
+                                    <data:DoubleClickTrayOptions x:Key="DoubleClickTrayOptions"/>
+                                    <data:DoubleClickCardOptions x:Key="DoubleClickCardOptions"/>
+                                    <data:DoubleClickFolderOptions x:Key="DoubleClickFolderOptions"/>
+                                </ListBox.Resources>
+                                <Button Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding CreateShortcut}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Tag" VerticalAlignment="Center"/>
+                                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.CreateDesktopShortcut}"/>
+                                    </StackPanel>
+                                </Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.ProgramLanguage}" VerticalAlignment="Center"/>
+                                    <ComboBox ItemsSource="{StaticResource LanguageOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding LangId}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.ClickTray}" VerticalAlignment="Center"/>
+                                    <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding ClickTray}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.DoubleClickTray}" VerticalAlignment="Center"/>
+                                    <ComboBox ItemsSource="{StaticResource DoubleClickTrayOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickTray}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.DoubleClickCard}" VerticalAlignment="Center"/>
+                                    <ComboBox ItemsSource="{StaticResource DoubleClickCardOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickCard}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.DoubleClickFolder}" VerticalAlignment="Center"/>
+                                    <ComboBox ItemsSource="{StaticResource DoubleClickFolderOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DoubleClickFolder}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding ShowWindowAtStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                    <TextBlock Text="{x:Static lang:Resource.ShowWindowAtStartup}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding SwitchOnStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                    <TextBlock Text="{x:Static lang:Resource.SwitchWallpaperOnStartup}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding AutoCheckAtStartup}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                    <TextBlock Text="{x:Static lang:Resource.AutoCheckUpdate}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding RunAtSystemStart}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                    <TextBlock Text="{x:Static lang:Resource.AutoRunProgram}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListBox>
+                        </GroupBox>
+                        <GroupBox Grid.Row="1" Header="{x:Static lang:Resource.WallpaperOptions}">
+                            <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
+                                <ListBox.Resources>
+                                    <data:WallpaperPositionOptions x:Key="WallpaperPositionOptions"/>
+                                    <data:BackgroundColorOptions x:Key="BackgroundColorOptions"/>
+                                </ListBox.Resources>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.WallpaperPosition}" VerticalAlignment="Center"/>
+                                    <ComboBox ItemsSource="{StaticResource WallpaperPositionOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding WallpaperPosition}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.DesktopBackgroundColor}" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="BackgroundColorModeComboBox" ItemsSource="{StaticResource BackgroundColorOptions}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding DesktopBackgroundMode}" Margin="10,0,0,0"/>
+                                    <TextBox VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:TextFieldAssist.PrefixText="#" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HEX}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding DesktopBackgroundColor}" IsEnabled="{Binding Path=DesktopBackgroundMode, Converter={StaticResource BackgroundModeConverter}}" uiconverter:HexStringAttachedProperties.IsHexString="True" uiconverter:EnterAttachedProperties.EnterPress="True" MaxLength="6" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
+                                    <Rectangle Margin="10,0,0,0" Fill="{Binding Path=DesktopBackgroundColor, Converter={StaticResource ColorToBrushConverter}}" Width="40" Height="40" RadiusX="25" RadiusY="25"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding DisableQualityReduction}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                    <TextBlock Text="{x:Static lang:Resource.DisableQualityReduction}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListBox>
+                        </GroupBox>
+                        <GroupBox Grid.Row="2" Header="{x:Static lang:Resource.HotKeySettings}">
+                            <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.ShowWindow}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="ShowWindowTextBox" VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HotKey}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=ShowWindowHotKey, Mode=OneWay}" IsEnabled="{Binding CanSetShowWindowHotKey}" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" uiconverter:HotKeyAttachedProperties.HotKey="True"/>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding SetShowWindowHotKey}" CommandParameter="{Binding ElementName=ShowWindowTextBox}">
+                                        <materialDesign:PackIcon Kind="{Binding Path=CanSetShowWindowHotKey, Converter={StaticResource BooleanToHotKeyIconConverter}}"/>
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearShowWindowHotKey}" CommandParameter="{Binding ElementName=ShowWindowTextBox}">
+                                        <materialDesign:PackIcon Kind="DeleteForever"/>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.SwitchNextWallpaper}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="SwitchWallpaperTextBox" VerticalAlignment="Center" Margin="20,0,0,0" materialDesign:HintAssist.Hint="{x:Static lang:Resource.HotKey}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SwitchWallpaperHotKey, Mode=OneWay}" IsEnabled="{Binding CanSetSwitchWallpaperHotKey}" materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden" uiconverter:HotKeyAttachedProperties.HotKey="True"/>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding SetSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
+                                        <materialDesign:PackIcon Kind="{Binding Path=CanSetSwitchWallpaperHotKey, Converter={StaticResource BooleanToHotKeyIconConverter}}"/>
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0" Command="{Binding ClearSwitchWallpaperHotKey}" CommandParameter="{Binding ElementName=SwitchWallpaperTextBox}">
+                                        <materialDesign:PackIcon Kind="DeleteForever"/>
+                                    </Button>
+                                </StackPanel>
+                            </ListBox>
+                        </GroupBox>
+                        <GroupBox Grid.Row="3" Header="{x:Static lang:Resource.Logging}">
+                            <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" Margin="10 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <ToggleButton IsChecked="{Binding EnableLogging}" Style="{StaticResource MaterialDesignSwitchToggleButton}" Content="{materialDesign:PackIcon Kind=Close}"/>
+                                    <TextBlock Text="{x:Static lang:Resource.EnableLogging}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static lang:Resource.LoggingCount}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=LoggingCount, Converter={StaticResource LongToStringConverter}}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="20,0,0,0"  Command="{Binding RefreshLoggingCount}" ToolTip="{x:Static lang:Resource.RefreshLoggingCount}">
+                                        <materialDesign:PackIcon Kind="DatabaseRefresh"/>
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding ClearLogging}" ToolTip="{x:Static lang:Resource.ClearLogging}">
+                                        <materialDesign:PackIcon Kind="DatabaseRemove"/>
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0,0,0"  Command="{Binding ExportLogging}" ToolTip="{x:Static lang:Resource.ExportLogging}">
+                                        <materialDesign:PackIcon Kind="DatabaseExport"/>
+                                    </Button>
+                                </StackPanel>
+                            </ListBox>
+                        </GroupBox>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <Canvas Width="24" Height="24">
+                            <Ellipse Canvas.Left="24" Canvas.Top="-6" Width="8" Height="8" Fill="Red" Visibility="{Binding Path=IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="InformationOutline"/>
+                        </Canvas>
+                        <TextBlock HorizontalAlignment="Center" Text="{x:Static lang:Resource.TabAbout}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10,10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10,10,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Width="100" Height="100" Source="/MMWS.ico" Stretch="Uniform"/>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Multi-Monitor Wallpaper Switcher"/>
-                                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{Binding Version}" Margin="10,0,0,0"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="5,0,0,0"  Width="30" Height="30" ToolTip="{Binding CheckButtonTip}" Command="{Binding CheckUpdate}">
-                                    <materialDesign:PackIcon Kind="{Binding CheckButtonKind}"/>
-                                </Button>
-                            </StackPanel>
-                            <TextBlock Grid.Row="2" Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding VersionText}" Foreground="{Binding VersionTextColor}" Visibility="{Binding Path=IsShowVersionText, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center"/>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Line Grid.Column="0" X1="0" Y1="2" X2="25" Y2="2" StrokeThickness="1" Height="5" Width="Auto" Margin="10,0,0,0" Stroke="#FFB4B4B4"/>
-                            <TextBlock Grid.Column="1" Text="{x:Static lang:Resource.Support}" Margin="15,0" VerticalAlignment="Center"/>
-                            <Line Grid.Column="2" X1="0" Y1="2" X2="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}" Y2="2" Stroke="#FFB4B4B4" StrokeThickness="1" Height="5" Width="Auto" Margin="0,0,10,0"/>
-                        </Grid>
-                        <StackPanel Grid.Row="2" Margin="10 5" Orientation="Vertical">
-                            <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" TextWrapping="Wrap" Text="{x:Static lang:Resource.SupportDescription}"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.SourceCode}"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher/issues">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="LightbulbQuestion"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.Feedback}"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
+                        <Image Grid.Row="0" Width="100" Height="100" Source="/MMWS.ico" Stretch="Uniform"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Multi-Monitor Wallpaper Switcher"/>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{Binding Version}" Margin="10,0,0,0"/>
+                            <Button Style="{StaticResource MaterialDesignIconButton}" Margin="5,0,0,0"  Width="30" Height="30" ToolTip="{Binding CheckButtonTip}" Command="{Binding CheckUpdate}">
+                                <materialDesign:PackIcon Kind="{Binding CheckButtonKind}"/>
+                            </Button>
                         </StackPanel>
-                        <Grid Grid.Row="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Line Grid.Column="0" X1="0" Y1="2" X2="25" Y2="2" StrokeThickness="1" Height="5" Width="Auto" Margin="10,0,0,0" Stroke="#FFB4B4B4"/>
-                            <TextBlock Grid.Column="1" Text="{x:Static lang:Resource.Thanks}" Margin="15,0,5,0" VerticalAlignment="Center"/>
-                            <materialDesign:PackIcon Grid.Column="2" Margin="0,0,15,0" Kind="AccountHeart"/>
-                            <Line Grid.Column="3" X1="0" Y1="2" X2="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}" Y2="2" Stroke="#FFB4B4B4" StrokeThickness="1" Height="5" Width="Auto" Margin="0,0,10,0"/>
-                        </Grid>
-                        <StackPanel Grid.Row="4" Margin="10,5" Orientation="Vertical">
-                            <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" TextWrapping="Wrap" Text="{x:Static lang:Resource.ThanksDescription}"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/fluentscheduler/FluentScheduler">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="FluentScheduler (BSD)"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/hardcodet/wpf-notifyicon">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Hardcodet NotifyIcon for WPF (CPOL-1.02)"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/JamesNK/Newtonsoft.Json">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Json.NET (MIT)"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Material Design In XAML Toolkit (MIT)"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/Microsoft/XamlBehaviorsWpf">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="XamlBehaviors for WPF (MIT)"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://www.sqlite.org/copyright.html">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Database"  VerticalAlignment="Center"/>
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="SQLite"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
-                        </StackPanel>
+                        <TextBlock Grid.Row="2" Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding VersionText}" Foreground="{Binding VersionTextColor}" Visibility="{Binding Path=IsShowVersionText, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center"/>
                     </Grid>
-                </TabItem>
-            </TabControl>
-        </materialDesign:Card>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Line Grid.Column="0" X1="0" Y1="2" X2="25" Y2="2" StrokeThickness="1" Height="5" Width="Auto" Margin="10,0,0,0" Stroke="#FFB4B4B4"/>
+                        <TextBlock Grid.Column="1" Text="{x:Static lang:Resource.Support}" Margin="15,0" VerticalAlignment="Center"/>
+                        <Line Grid.Column="2" X1="0" Y1="2" X2="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}" Y2="2" Stroke="#FFB4B4B4" StrokeThickness="1" Height="5" Width="Auto" Margin="0,0,10,0"/>
+                    </Grid>
+                    <StackPanel Grid.Row="2" Margin="10 5" Orientation="Vertical">
+                        <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" TextWrapping="Wrap" Text="{x:Static lang:Resource.SupportDescription}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.SourceCode}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/LightAPIs/MultiMonitorWallpaperSwitcher/issues">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="LightbulbQuestion"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{x:Static lang:Resource.Feedback}"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Line Grid.Column="0" X1="0" Y1="2" X2="25" Y2="2" StrokeThickness="1" Height="5" Width="Auto" Margin="10,0,0,0" Stroke="#FFB4B4B4"/>
+                        <TextBlock Grid.Column="1" Text="{x:Static lang:Resource.Thanks}" Margin="15,0,5,0" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Grid.Column="2" Margin="0,0,15,0" Kind="AccountHeart"/>
+                        <Line Grid.Column="3" X1="0" Y1="2" X2="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}" Y2="2" Stroke="#FFB4B4B4" StrokeThickness="1" Height="5" Width="Auto" Margin="0,0,10,0"/>
+                    </Grid>
+                    <StackPanel Grid.Row="4" Margin="10,5" Orientation="Vertical">
+                        <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" TextWrapping="Wrap" Text="{x:Static lang:Resource.ThanksDescription}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/fluentscheduler/FluentScheduler">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="FluentScheduler (BSD)"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/hardcodet/wpf-notifyicon">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Hardcodet NotifyIcon for WPF (CPOL-1.02)"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/JamesNK/Newtonsoft.Json">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Json.NET (MIT)"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="Material Design In XAML Toolkit (MIT)"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://github.com/Microsoft/XamlBehaviorsWpf">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Github"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="XamlBehaviors for WPF (MIT)"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenUrl}" CommandParameter="https://www.sqlite.org/copyright.html">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Database"  VerticalAlignment="Center"/>
+                                    <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="SQLite"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
