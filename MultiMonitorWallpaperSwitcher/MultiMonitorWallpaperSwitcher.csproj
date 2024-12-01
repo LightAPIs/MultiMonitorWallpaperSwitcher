@@ -8,10 +8,10 @@
     <ApplicationIcon>Images\MMWS.ico</ApplicationIcon>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Authors>Light</Authors>
-    <Copyright>Copyright © 2022 Light</Copyright>
+    <Copyright>Copyright © 2022–2024 Light</Copyright>
     <UseWindowsForms>True</UseWindowsForms>
     <Platforms>AnyCPU</Platforms>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <AssemblyVersion>1.4.1.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <Version>$(AssemblyVersion)</Version>
     <Product>Multi-Monitor Wallpaper Switcher</Product>
