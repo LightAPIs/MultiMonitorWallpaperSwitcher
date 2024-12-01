@@ -4,16 +4,23 @@
              xmlns:local="clr-namespace:MultiMonitorWallpaperSwitcher"
              xmlns:lang="clr-namespace:LanguageResources;assembly=LanguageResources"
              xmlns:tb="http://www.hardcodet.net/taskbar"
-             xmlns:taskbar="clr-namespace:MultiMonitorWallpaperSwitcher.Taskbar">
+             xmlns:taskbar="clr-namespace:MultiMonitorWallpaperSwitcher.Taskbar"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary>
-            <ContextMenu x:Key="TrayMenu" x:Shared="false">
-                <MenuItem Header="{x:Static lang:Resource.ShowWindow}" Command="{Binding ShowWindowCommand}"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml"/>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.GroupBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ContextMenu x:Key="TrayMenu" x:Shared="false" FontFamily="Microsoft YaHei">
+                <MenuItem Header="{x:Static lang:Resource.ShowWindow}" Icon="{materialDesign:PackIcon Kind=Monitor}" Command="{Binding ShowWindowCommand}"/>
                 <Separator/>
-                <MenuItem Header="{x:Static lang:Resource.SwitchWallpaperSet}" Command="{Binding SwitchNextWallpaperSet}"/>
+                <MenuItem Header="{x:Static lang:Resource.SwitchWallpaperSet}" Icon="{materialDesign:PackIcon Kind=SkipNext}" Command="{Binding SwitchNextWallpaperSet}"/>
                 <MenuItem Header="{x:Static lang:Resource.PauseAutoSwitch}" IsCheckable="True" IsChecked="{Binding PauseState}"/>
                 <Separator/>
-                <MenuItem Header="{x:Static lang:Resource.ExitProgram}" Command="{Binding ExitApplicationCommand}"/>
+                <MenuItem Header="{x:Static lang:Resource.ExitProgram}" Icon="{materialDesign:PackIcon Kind=ExitToApp}" Command="{Binding ExitApplicationCommand}"/>
             </ContextMenu>
             <tb:TaskbarIcon x:Key="Taskbar" ToolTipText="Multi-Monitor Wallpaper Switcher" IconSource="{Binding IconFile}" LeftClickCommand="{Binding ClickCustomCommand}" DoubleClickCommand="{Binding DoubleCustomCommand}" ContextMenu="{StaticResource TrayMenu}">
                 <tb:TaskbarIcon.DataContext>
